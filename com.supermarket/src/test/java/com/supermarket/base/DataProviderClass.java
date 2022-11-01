@@ -4,9 +4,9 @@ import org.testng.annotations.DataProvider;
 
 public class DataProviderClass 
 {
-	@DataProvider (name="LoginDetails")
-	public Object[][] emailpass()
+	@DataProvider (name="pushNotification")
+	public Object[][] pushNotificationDetails()
 	{
-		return new Object [][] {{"ravindranchaithra@gmail.com","Annu1234$$"},{"vaishak.mr@gmail.com","agfil184"},{"admin","admin"}};
+		return new Object [][] {{"Fruits","Imported Fresh fruits arriving soon"},{"Ice Creams","Offers available"},{"Chocolates","Homemade chocolates availabe"}};
 	}
 }

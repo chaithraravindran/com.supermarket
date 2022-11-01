@@ -29,7 +29,7 @@ public void select_ByVisibleText(String visibletext,WebElement element)
 	Select select=new Select(element);
 	select.selectByVisibleText(visibletext);
 }
-public void scroll_Down(int x,int y)
+public void scroll_DownJSExecutor(int x,int y)
 {
 	js=(JavascriptExecutor) driver;
 	js.executeScript("window.scrollBy(" + x + "," + y + ")");
@@ -58,7 +58,7 @@ public boolean click_Status(WebElement element)
 		}
 	
 }
-public void click_Element(WebElement element)
+public void click_JSExceutor(WebElement element)
 {
 	js=(JavascriptExecutor) driver;
 	js.executeScript("arguments[0].click();", element);

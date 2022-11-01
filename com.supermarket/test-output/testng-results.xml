@@ -1,25 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="6" total="7" passed="1">
+<testng-results skipped="0" failed="0" ignored="4" total="5" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="22009" started-at="2022-10-28T01:44:03Z" finished-at="2022-10-28T01:44:25Z">
+  <suite name="Default suite" duration-ms="26091" started-at="2022-10-31T18:10:27Z" finished-at="2022-10-31T18:10:53Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="22009" started-at="2022-10-28T01:44:03Z" finished-at="2022-10-28T01:44:25Z">
-      <class name="com.supermarket.tests.DeliveryBoyTest">
-        <test-method status="PASS" signature="setUp()[pri:0, instance:com.supermarket.tests.DeliveryBoyTest@4bbfb90a]" name="setUp" is-config="true" duration-ms="17036" started-at="2022-10-28T07:14:03Z" finished-at="2022-10-28T07:14:20Z">
+    <test name="Default test" duration-ms="26091" started-at="2022-10-31T18:10:27Z" finished-at="2022-10-31T18:10:53Z">
+      <class name="com.supermarket.tests.ManageExpenseTest">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:com.supermarket.tests.ManageExpenseTest@9660f4e]" name="setUp" is-config="true" duration-ms="20167" started-at="2022-10-31T23:40:27Z" finished-at="2022-10-31T23:40:47Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="verify_UpdateDeliveryBoy()[pri:0, instance:com.supermarket.tests.DeliveryBoyTest@4bbfb90a]" name="verify_UpdateDeliveryBoy" duration-ms="4946" started-at="2022-10-28T07:14:20Z" finished-at="2022-10-28T07:14:25Z">
+        <test-method status="PASS" signature="verify_search()[pri:0, instance:com.supermarket.tests.ManageExpenseTest@9660f4e]" name="verify_search" duration-ms="5901" started-at="2022-10-31T23:40:47Z" finished-at="2022-10-31T23:40:53Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- verify_UpdateDeliveryBoy -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.supermarket.tests.DeliveryBoyTest@4bbfb90a]" name="tearDown" is-config="true" duration-ms="1" started-at="2022-10-28T07:14:25Z" finished-at="2022-10-28T07:14:25Z">
+        </test-method> <!-- verify_search -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.supermarket.tests.ManageExpenseTest@9660f4e]" name="tearDown" is-config="true" duration-ms="2" started-at="2022-10-31T23:40:53Z" finished-at="2022-10-31T23:40:53Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=verify_search status=SUCCESS method=ManageExpenseTest.verify_search()[pri:0, instance:com.supermarket.tests.ManageExpenseTest@9660f4e] output={null}]]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-      </class> <!-- com.supermarket.tests.DeliveryBoyTest -->
+      </class> <!-- com.supermarket.tests.ManageExpenseTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

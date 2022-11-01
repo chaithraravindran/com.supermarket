@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="4" guice-stage="DEVELOPMENT" name="Failed suite [crossbrowsertesting]" parallel="tests">
+  <listeners>
+    <listener class-name="com.supermarket.listeners.ExtendReporter"/>
+  </listeners>
+  <test name="verify in firefox(failed)" parallel="tests">
+    <parameter name="browser" value="firefox"/>
+    <classes>
+      <class name="com.supermarket.tests.LoginTest">
+        <methods>
+          <include name="setUp"/>
+          <include name="verify_Login"/>
+          <include name="setUpCrossBrowser"/>
+          <include name="verify_InvalidLoginCredentialAlertMessage"/>
+          <include name="tearDown"/>
+          <include name="verify_ProfileImageisDisplayed"/>
+        </methods>
+      </class> <!-- com.supermarket.tests.LoginTest -->
+      <class name="com.supermarket.tests.PushNotificationTest">
+        <methods>
+          <include name="verify_SuccessAlertPushNotification"/>
+          <include name="setUp"/>
+          <include name="setUpCrossBrowser"/>
+          <include name="verify_AlertTextPushNotificationByDataProviderClass"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- com.supermarket.tests.PushNotificationTest -->
+    </classes>
+  </test> <!-- verify in firefox(failed) -->
+  <test name="verify in chrome(failed)" parallel="tests">
+    <parameter name="browser" value="chrome"/>
+    <classes>
+      <class name="com.supermarket.tests.LoginTest">
+        <methods>
+          <include name="setUp"/>
+          <include name="setUpCrossBrowser"/>
+          <include name="verify_InvalidLoginCredentialAlertMessage"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- com.supermarket.tests.LoginTest -->
+      <class name="com.supermarket.tests.PushNotificationTest">
+        <methods>
+          <include name="setUp"/>
+          <include name="setUpCrossBrowser"/>
+          <include name="verify_AlertTextPushNotificationByDataProviderClass" invocation-numbers="1"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- com.supermarket.tests.PushNotificationTest -->
+    </classes>
+  </test> <!-- verify in chrome(failed) -->
+  <test name="verify in edge(failed)" parallel="tests">
+    <parameter name="browser" value="edge"/>
+    <classes>
+      <class name="com.supermarket.tests.LoginTest">
+        <methods>
+          <include name="setUp"/>
+          <include name="setUpCrossBrowser"/>
+          <include name="verify_InvalidLoginCredentialAlertMessage"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- com.supermarket.tests.LoginTest -->
+      <class name="com.supermarket.tests.PushNotificationTest">
+        <methods>
+          <include name="verify_SuccessAlertPushNotification"/>
+          <include name="setUp"/>
+          <include name="setUpCrossBrowser"/>
+          <include name="verify_AlertTextPushNotificationByDataProviderClass" invocation-numbers="1"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- com.supermarket.tests.PushNotificationTest -->
+    </classes>
+  </test> <!-- verify in edge(failed) -->
+</suite> <!-- Failed suite [crossbrowsertesting] -->

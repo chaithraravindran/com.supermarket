@@ -6,6 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.supermarket.base.Base;
+import com.supermarket.base.DataProviderClass;
 import com.supermarket.constants.Constants;
 import com.supermarket.pages.LoginPage;
 import com.supermarket.pages.PushNotificationPage;
@@ -45,5 +46,18 @@ public class PushNotificationTest extends Base
 		//String expectedAlertMessage=Constants.EXPECTED_ALERT_TEXT;
 		//Assert.assertEquals(actualAlertMessage, expectedAlertMessage,"This testcase failed");	
 	}
-	//@Test(dataProvider="")
+	
+	@Test(dataProvider="pushNotification",dataProviderClass=DataProviderClass.class)
+	public void verify_AlertTextPushNotificationByDataProviderClass(String title, String description)
+	{
+		loginpage=new LoginPage(driver);
+		loginpage.login();
+		pushnotificationpage=new PushNotificationPage(driver);
+		pushnotificationpage.click_OnPushNotification();
+		pushnotificationpage.enter_title(title);
+		pushnotificationpage.enter_description(description);
+		pushnotificationpage.click_onSendButton();
+		pushnotificationpage.getText_SuccessAlertPushNotificationMessage();
+	}
+	
 }

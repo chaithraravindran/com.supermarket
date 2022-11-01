@@ -1,29 +1,75 @@
 package com.supermarket.pages;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.supermarket.utilities.GeneralUtility;
 import com.supermarket.utilities.PageUtility;
 
 public class ManageExpensePage 
 {
 WebDriver driver;
 PageUtility pageutility;
+GeneralUtility generalutility;
+
 @FindBy(xpath="//i[@class='nav-icon fas fa-money-bill-alt']")
 private WebElement manageExpenseLink;
 @FindBy(xpath="//a[@href='https://groceryapp.uniqassosiates.com/admin/list-expense']")
-private WebElement manageExpenseCheckBox;
+private WebElement subManageExpense;
 @FindBy(xpath="//a[@class='btn btn-rounded btn-danger']")
 private WebElement newButton;
 @FindBy(xpath="//select[@id='user_id']")
 private WebElement user;
 @FindBy(xpath="//input[@id='ex_date']")
 private WebElement date;
-@FindBy(xpath="//td[@data-date='1665964800000']")
-private WebElement selectedDate;
+@FindBy(xpath="//select[@id='ex_cat']")
+private WebElement category;
+@FindBy(xpath="//select[@id='order_id']")
+private WebElement orderID;
+@FindBy(xpath="//select[@id='purchase_id']")
+private WebElement purchaseID;
+@FindBy(xpath="//select[@id='ex_type']")
+private WebElement expenseType;
+@FindBy(xpath="//input[@id='amount']")
+private WebElement amount;
+@FindBy(xpath="//textarea[@id='content']")
+private WebElement remarks;
+@FindBy(xpath="//input[@type='file']")
+private WebElement chooseFile;
+@FindBy(xpath="//button[@type='submit']")
+private WebElement saveButton;
+
+//@FindBy(xpath="(//tbody//tr[17]//td[9]//a)[1]")
+//private WebElement editButton;
+@FindBy(xpath="//button[@name='update']")
+private WebElement updateButton;
+
+@FindBy(xpath="//a[@class='btn btn-rounded btn-primary']")
+private WebElement searchButton;
+@FindBy(xpath="//select[@id='um']")
+private WebElement searchUsers;
+@FindBy(xpath="//select[@id='uc']")
+private WebElement searchCategory;
+@FindBy(xpath="//select[@id='od']")
+private WebElement searchOrderID;
+@FindBy(xpath="//select[@id='ty']")
+private WebElement searchExpenseType;
+@FindBy(xpath="//select[@id='pi']")
+private WebElement searchPurchaseID ;
+@FindBy(xpath="//input[@id='ti']")
+private WebElement searchTitle;
+@FindBy(xpath="//button[@class='btn btn-danger btn-fix']")
+private WebElement searchListButton;
+@FindBy(xpath="//a[@class='btn btn-rounded btn-info']")
+private WebElement reportButton;
+
 public ManageExpensePage(WebDriver driver)
 {
 	this.driver=driver;
@@ -33,87 +79,183 @@ public void click_OnManageExpense()
 {
 	manageExpenseLink.click();
 }
-public void click_OnManageExpenseCheckBox()
+public void click_OnSubManageExpense()
 {
-	manageExpenseCheckBox.click();
+	subManageExpense.click();
 }
 public void click_OnNewButton()
 {
 	newButton.click();
 }
-public void selectUser()
+public void select_User()
 {
 	pageutility=new PageUtility(driver);
 	pageutility.select_ByIndex(3,user);
 }
-public void click_OnDateField()
+public void select_Category()
 {
-	date.click();
+	pageutility=new PageUtility(driver);
+	pageutility.select_ByVisibleText("IceCreams",category);
 }
-public void selectedDate()
+public void select_OrderID()
 {
-	selectedDate.click();
+	pageutility=new PageUtility(driver);
+	pageutility.select_ByValue("8", orderID);
 }
-/*public void selectDate(String Date)
+public void select_PurchseID()
 {
-	click_OnDateField();
-	String splitArray[]=Date.split("/");
-	String year=splitArray[2];
-	String day=splitArray[0];
-	int n=Integer.parseInt(splitArray[1]);  
-	String month="";
-	switch(n)
+	pageutility=new PageUtility(driver);
+	pageutility.select_ByIndex(6,purchaseID);
+}
+public void select_ExpenseType()
+{
+	pageutility=new PageUtility(driver);
+	pageutility.select_ByVisibleText("Debit Cash",expenseType);
+}
+public void enter_Amount(String Amount)
+{
+	amount.sendKeys(Amount);
+}
+public void enter_Remarks(String Remarks)
+{
+	remarks.sendKeys(Remarks);
+}
+public void scroll_DownPage()
+{
+	pageutility=new PageUtility(driver);
+	pageutility.scroll_DownJSExecutor(0,6000);
+}
+public void click_ChooseFile()
+{
+	pageutility=new PageUtility(driver);
+	pageutility.click_JSExceutor(chooseFile);
+}
+public void file_Upload(String filePath) 
+{
+	chooseFile.sendKeys(filePath);
+}
+public void click_OnSaveButton()
+{
+	saveButton.click();
+}
+public void click_OnUpdateButton()
+{
+	updateButton.click();
+}
+public void click_OnSearchButton()
+{
+	searchButton.click();
+}
+
+public void add_Expense(String Amount,String Remarks)
+{
+	click_OnManageExpense();
+	click_OnSubManageExpense();
+	click_OnNewButton();
+	select_User();
+	select_Category();
+	select_OrderID();
+	select_PurchseID();
+	select_ExpenseType();
+	enter_Amount(Amount);
+	enter_Remarks(Remarks);
+	scroll_DownPage();
+	//click_ChooseFile();
+}
+
+public void edit_ExpenseDetails(String titleName)
+{
+	List<String> titleNames=new ArrayList<String>();
+	generalutility=new GeneralUtility(driver);
+	titleNames=generalutility.get_TextOfElements("//tbody//tr//td[1]");
+	int i=0;
+	for(i=0;i<titleNames.size();i++)
 	{
-	case 1: month="January";
-	break;
-	case 2: month="February";
-	break;
-	case 3: month="March";
-	break;
-	case 4: month="April";
-	break;
-	case 5: month="May";
-	break;
-	case 6: month="June";
-	break;
-	case 7: month="July";
-	break;
-	case 8: month="August";
-	break;
-	case 9: month="September";
-	break;
-	case 10: month="October";
-	break;
-	case 11: month="November";
-	break;
-	case 12: month="December";
-	break;
-	}
-	System.out.println(day);
-	System.out.println(month);
-	System.out.println(year);
-	WebElement prevButton=driver.findElement(By.xpath("//th[@class='prev']"));
-	WebElement nextButton=driver.findElement(By.xpath("//th[@class='next']"));
-	String month_year=month+" "+year;
-	while(true)
-	{
-		String actualMonthYear=driver.findElement(By.xpath("(//th[@class='datepicker-switch'])[1]")).getText();//current month year displayed 
-		if(actualMonthYear.equals(month_year))
+		if(titleName.equals(titleNames.get(i)))
 		{
+			i++;
 			break;
 		}
-		else if(n>10)//Here the current month is October ie., 10
+	}
+	WebElement editButton=driver.findElement(By.xpath("(//tbody//tr["+i+"]//td[9]//a)[1]"));
+	editButton.click();
+}
+public void clear_Field()
+{
+	generalutility=new GeneralUtility(driver);
+	generalutility.clear_Text(amount);
+}
+public void update_Field(String Amount)
+{
+	enter_Amount(Amount);
+	click_OnUpdateButton();
+}
+public void delete_Expense(String titleName)
+{
+	List<String> titleNames=new ArrayList<String>();
+	generalutility=new GeneralUtility(driver);
+	titleNames=generalutility.get_TextOfElements("//tbody//tr//td[1]");
+	int i=0;
+	for(i=0;i<titleNames.size();i++)
+	{
+		if(titleName.equals(titleNames.get(i)))
 		{
-				nextButton.click();
-		}
-		else
-		{
-			prevButton.click();
+			i++;
+			break;
 		}
 	}
-	driver.findElement(By.xpath("//td[text()='"+day+"' and @class='day']")).click();//xpath of same days in a month
-			 //(ie.,1st of every month, one is enabled and other is disabled b'coz it is the 1st of next month.
+	WebElement deleteButton=driver.findElement(By.xpath("(//tbody//tr["+i+"]//td[9]//a)[2]"));
+	deleteButton.click();
+	driver.switchTo().alert().accept();
+}
+public void search_ListExpense()
+{
+	searchUsers.click();
+	pageutility=new PageUtility(driver);
+	pageutility.select_ByIndex(5,searchUsers);
+	searchCategory.click();
+	pageutility=new PageUtility(driver);
+	pageutility.select_ByVisibleText("IceCreams",searchCategory);
+	searchExpenseType.click();
+	pageutility=new PageUtility(driver);
+	pageutility.select_ByVisibleText("Credit Cash",searchExpenseType);
+	searchOrderID.click();
+	pageutility=new PageUtility(driver);
+	pageutility.select_ByValue("9", searchOrderID);
+	searchPurchaseID.click();
+	pageutility=new PageUtility(driver);
+	pageutility.select_ByIndex(3,searchPurchaseID);
+}
+public void click_OnSearchListExpenseButton()
+{
+	pageutility.scroll_andClick(searchListButton);
+}
+public void enter_SearchTitle(String title)
+{
+	searchTitle.sendKeys(title);
+}
+public boolean searchListExpenseButton_IsEnabled()
+{
+	generalutility=new GeneralUtility(driver);
+	return generalutility.is_Enabled(searchListButton);
+	
+}
 
-	}*/
+/*String parentWindow=driver.getWindowHandle();
+System.out.println(parentWindow);
 
+Set<String> windows=driver.getWindowHandles();
+System.out.println(windows.size());
+for(String childWindow:windows)
+{
+	if(parentWindow.equals(childWindow))
+	{
+		System.out.println("No need to print");
+		System.out.println(childWindow+""+parentWindow);
+	}
+	else
+	{
+		driver.switchTo().window(childWindow);
+	}
+}*/
 }

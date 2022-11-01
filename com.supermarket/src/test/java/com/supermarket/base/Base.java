@@ -8,10 +8,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 
 import com.supermarket.constants.Constants;
+import com.supermarket.utilities.ScreenShot;
 import com.supermarket.utilities.WaitUtility;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -21,6 +24,7 @@ public class Base
 	public WebDriver driver;
 	Properties prop;
 	FileInputStream ip;
+	ScreenShot screenshot;
 
 	public Base() {
 		prop = new Properties();
@@ -50,19 +54,35 @@ public class Base
 		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(WaitUtility.PAGE_LOAD_WAIT));
 	}
 
-	@BeforeMethod
-	public void setUp() 
+	@Parameters("browser")
+	@BeforeMethod(enabled=false)
+	public void setUpCrossBrowser(String browser) 
+	{
+		//String browser;
+		String url;
+		//browser=prop.getProperty("browser");
+		url=prop.getProperty("url");
+		initialize(browser,url);
+	}
+	@BeforeMethod(enabled=true)
+	public void setUp()
 	{
 		String browser;
 		String url;
 		browser=prop.getProperty("browser");
 		url=prop.getProperty("url");
 		initialize(browser,url);
-		
 	}
+	
 	@AfterMethod
-	public void tearDown()
+	public void tearDown(ITestResult itestresult)
 	{
+		screenshot=new ScreenShot();
+		if(itestresult.getStatus()==ITestResult.FAILURE)
+		{
+			String testcaseName=itestresult.getName();
+			screenshot.take_screen_Shot(driver, testcaseName);
+		}
 		//driver.close();
 	}
 }

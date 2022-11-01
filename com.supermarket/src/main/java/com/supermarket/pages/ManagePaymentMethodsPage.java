@@ -31,12 +31,12 @@ public ManagePaymentMethodsPage(WebDriver driver)
 public void scrollDownPage()
 {
 	pageutility=new PageUtility(driver);
-	pageutility.scroll_Down(0,6000);
+	pageutility.scroll_DownJSExecutor(0,6000);
 }
 public void click_OnManagePaymentMethods()
 {
 	pageutility=new PageUtility(driver);
-	pageutility.click_Element(managePaymentMethods);
+	pageutility.click_JSExceutor(managePaymentMethods);
 }
 public void click_OnActionButton()
 {

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="3" guice-stage="DEVELOPMENT" name="Failed suite [parallelRun]" parallel="tests">
+  <listeners>
+    <listener class-name="com.supermarket.listeners.ExtendReporter"/>
+  </listeners>
+  <test name="Smoke(failed)" parallel="tests">
+    <classes>
+      <class name="com.supermarket.tests.ManageUsersTest">
+        <methods>
+          <include name="setUp"/>
+          <include name="tearDown"/>
+          <include name="verify_manageUserDeactivation"/>
+        </methods>
+      </class> <!-- com.supermarket.tests.ManageUsersTest -->
+      <class name="com.supermarket.tests.ManageExpenseTest">
+        <methods>
+          <include name="setUp"/>
+          <include name="tearDown"/>
+          <include name="verify_AddExpense"/>
+        </methods>
+      </class> <!-- com.supermarket.tests.ManageExpenseTest -->
+    </classes>
+  </test> <!-- Smoke(failed) -->
+  <test name="Regression(failed)" parallel="tests">
+    <classes>
+      <class name="com.supermarket.tests.LoginTest">
+        <methods>
+          <include name="setUp"/>
+          <include name="verify_InvalidLoginCredentialAlertMessage"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- com.supermarket.tests.LoginTest -->
+    </classes>
+  </test> <!-- Regression(failed) -->
+</suite> <!-- Failed suite [parallelRun] -->

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="crossbrowsertesting" thread-count="4" parallel="tests">
+	<listeners>
+		<listener
+			class-name="com.supermarket.listeners.ExtendReporter"></listener>
+	</listeners>
+	<test name="verify in chrome">
+	<parameter name="browser" value="chrome"></parameter>
+		<classes>
+			<class name="com.supermarket.tests.LoginTest">
+			</class>
+			<class name="com.supermarket.tests.PushNotificationTest">
+			</class>
+		</classes>
+	</test>
+	
+	<test name="verify in firefox">
+	<parameter name="browser" value="firefox"></parameter>
+		<classes>
+			<class name="com.supermarket.tests.LoginTest">
+			</class>
+			<class name="com.supermarket.tests.PushNotificationTest">
+			</class>
+		</classes>
+	</test>
+	
+	<test name="verify in edge">
+	<parameter name="browser" value="edge"></parameter>
+		<classes>
+			<class name="com.supermarket.tests.LoginTest">
+			</class>
+			<class name="com.supermarket.tests.PushNotificationTest">
+			</class>
+		</classes>
+	</test>
+	</suite>
