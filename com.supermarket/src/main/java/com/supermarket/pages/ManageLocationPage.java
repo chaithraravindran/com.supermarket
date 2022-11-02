@@ -35,6 +35,13 @@ private WebElement deliveryCharge;
 private WebElement saveButton;
 @FindBy(xpath="//a[@type='button']")
 private WebElement cancelButton;
+@FindBy(xpath="//button[@name='update']")
+private WebElement updateButton;
+
+@FindBy(xpath="//i[@class=' fa fa-search']")
+private WebElement searchButton;
+@FindBy(xpath="//button[@name='Search']")
+private WebElement searchLocationButton;
 
 public ManageLocationPage(WebDriver driver)
 {
@@ -75,6 +82,18 @@ public void click_OnCancelButton()
 {
 	cancelButton.click();
 }
+public void click_OnUpdateButton()
+{
+	updateButton.click();
+}
+public void click_OnSearchButton()
+{
+	searchButton.click();
+}
+public void click_OnSearchListLocationsButton()
+{
+	pageutility.scroll_andClick(searchLocationButton);
+}
 public void enterLocationDetails(String Location,String DeliveryCharge)
 {
 	click_OnManageLocation();
@@ -95,15 +114,15 @@ public void enterLocationDetails_ClickCancel(String Location,String DeliveryChar
 	enter_DeliveryCharge(DeliveryCharge);
 	click_OnCancelButton();
 }
-public void deactivate_Location(String placeName)
+public void deactivate_Location(String locationName)
 {
 	generalutility=new GeneralUtility(driver);
-	List<String> placeNames=new ArrayList<String>();
-	placeNames=generalutility.get_TextOfElements("//tbody//tr//td[1]");
+	List<String> locationNames=new ArrayList<String>();
+	locationNames=generalutility.get_TextOfElements("//tbody//tr//td[1]");
 	int j=0;
-	for(j=0;j<placeNames.size();j++)
+	for(j=0;j<locationNames.size();j++)
 	{
-		if(placeName.equals(placeNames.get(j)))
+		if(locationName.equals(locationNames.get(j)))
 		{
 			j++;
 			break;
@@ -111,6 +130,65 @@ public void deactivate_Location(String placeName)
 	}
 	WebElement statusButton=driver.findElement(By.xpath("//tbody//tr["+j+"]//td[5]//a"));
 	statusButton.click();
+}
+public void edit_LocationDetails(String locationName)
+{
+	generalutility=new GeneralUtility(driver);
+	List<String> locationNames=new ArrayList<String>();
+	locationNames=generalutility.get_TextOfElements("//tbody//tr//td[1]");
+	int j=0;
+	for(j=0;j<locationNames.size();j++)
+	{
+		if(locationName.equals(locationNames.get(j)))
+		{
+			j++;
+			break;
+		}
+	}
+	WebElement editButton=driver.findElement(By.xpath("(//tbody//tr["+j+"]//td[6]//a)[1]"));
+	editButton.click();
+}
+public void clear_Field()
+{
+	generalutility=new GeneralUtility(driver);
+	generalutility.clear_Text(location);
+}
+public void update_Field(String Location)
+{
+	enter_Location(Location);
+	click_OnUpdateButton();
+}
+public void delete_Location(String locationName)
+{
+	List<String> locationNames=new ArrayList<String>();
+	generalutility=new GeneralUtility(driver);
+	locationNames=generalutility.get_TextOfElements("//tbody//tr//td[1]");
+	int j=0;
+	for(j=0;j<locationNames.size();j++)
+	{
+		if(locationName.equals(locationNames.get(j)))
+		{
+			j++;
+			break;
+		}
+	}
+	WebElement deleteButton=driver.findElement(By.xpath("(//tbody//tr["+j+"]//td[6]//a)[2]"));
+	deleteButton.click();
+	driver.switchTo().alert().accept();
+}
+public void search_Location(String Location)
+{
+	choose_Country();
+	choose_State();
+	enter_Location(Location);
+	click_OnSearchListLocationsButton();
+}
+
+
+public boolean searchListLocationButton_IsEnabled()
+{
+	generalutility=new GeneralUtility(driver);
+	return generalutility.is_Enabled(searchLocationButton);
 }
 
 }

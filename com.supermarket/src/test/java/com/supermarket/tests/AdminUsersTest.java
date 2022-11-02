@@ -4,10 +4,12 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.supermarket.base.Base;
+import com.supermarket.base.DataProviderClass;
 import com.supermarket.constants.Constants;
 import com.supermarket.pages.AdminUsersPage;
 import com.supermarket.pages.DeliveryBoyPage;
 import com.supermarket.pages.LoginPage;
+import com.supermarket.pages.ManageExpensePage;
 import com.supermarket.utilities.Excel;
 
 public class AdminUsersTest extends Base
@@ -37,11 +39,19 @@ public class AdminUsersTest extends Base
 		loginpage=new LoginPage(driver);
 		loginpage.login();
 		adminuserspage=new AdminUsersPage(driver);
-		adminuserspage.AdminUserDetails("Mike","mike@gmail");
+		adminuserspage.AdminUserDetails("Michael","mike@gmail");
 		String expectedResult=Constants.EXPECTED_ALERT_TEXT2;
-		String actualResult=adminuserspage.get_alertTextMessage();
+		String actualResult=adminuserspage.get_SucessAlertTextMessage();
 		System.out.println("The actual text alert message:" +actualResult);
 		Assert.assertEquals(actualResult, expectedResult,"This testcase failed");
+	}
+	@Test(dataProvider="adminUsers",dataProviderClass=DataProviderClass.class)
+	public void verify_AddAdminUsersByDataProviderClass(String UserName,String PassWord)
+	{
+		loginpage=new LoginPage(driver);
+		loginpage.login();
+		adminuserspage=new AdminUsersPage(driver);
+		adminuserspage.AdminUserDetails(UserName,PassWord);
 	}
 	@Test
 	public void verify_existingAdminUsersAlertMessage()
@@ -51,7 +61,7 @@ public class AdminUsersTest extends Base
 		adminuserspage=new AdminUsersPage(driver);
 		adminuserspage.AdminUserDetails("Nike","nike@gmail");
 		String expectedResult=Constants.EXPECTED_ALERT_TEXT2;
-		String actualResult=adminuserspage.get_alertTextMessage();
+		String actualResult=adminuserspage.get_AlertTextMessage();
 		System.out.println("The actual text alert message:" +actualResult);
 		Assert.assertEquals(actualResult, expectedResult,"This testcase failed");
 	}
@@ -62,8 +72,8 @@ public class AdminUsersTest extends Base
 		loginpage.login();
 		adminuserspage=new AdminUsersPage(driver);
 		adminuserspage.AdminUserDetails("Nike","nike@gmail");
-		adminuserspage.get_alertTextMessage();
-		String actualBackgroundColor=adminuserspage.get_backgroundColorAlertText();
+		adminuserspage.get_AlertTextMessage();
+		String actualBackgroundColor=adminuserspage.get_BackGroundColorAlertText();
 		String expectedBackgroundColor="rgba(220, 53, 69, 1)";
 		Assert.assertEquals(actualBackgroundColor, expectedBackgroundColor);
 	}
@@ -74,7 +84,7 @@ public class AdminUsersTest extends Base
 		loginpage.login();
 		adminuserspage=new AdminUsersPage(driver);
 		adminuserspage.click_OnAdminUsers();
-		adminuserspage.deactivate_statusAdminUser("Nike");
+		adminuserspage.deactivate_statusAdminUser("Ann");
 	}
 	@Test
 	public void verify_adminUserActionButtonDeactivation()
@@ -83,7 +93,7 @@ public class AdminUsersTest extends Base
 		loginpage.login();
 		adminuserspage=new AdminUsersPage(driver);
 		adminuserspage.click_OnAdminUsers();
-		adminuserspage.deactivate_actionButtonAdminUser("max@");
+		adminuserspage.deactivate_actionButtonAdminUser("Mike");
 	}
 	@Test
 	public void verify_deleteAdminUser()
@@ -92,6 +102,30 @@ public class AdminUsersTest extends Base
 		loginpage.login();
 		adminuserspage=new AdminUsersPage(driver);
 		adminuserspage.click_OnAdminUsers();
-		adminuserspage.deleteAdminUser("mahi");
+		adminuserspage.deleteAdminUser("user100");
+	}
+	@Test
+	public void verify_UpdateAdminUser()
+	{
+		loginpage=new LoginPage(driver);
+		loginpage.login();
+		adminuserspage=new AdminUsersPage(driver);
+		adminuserspage.click_OnAdminUsers();
+		adminuserspage.edit_AdminUser("Ian");
+		adminuserspage.clear_Field();
+		adminuserspage.update_Field("Ian Jackson");
+	}
+	@Test
+	public void verify_search()
+	{
+		loginpage=new LoginPage(driver);
+		loginpage.login();
+		adminuserspage=new AdminUsersPage(driver);
+		adminuserspage.click_OnAdminUsers();
+		adminuserspage.click_OnSearchButton();
+		adminuserspage.enter_UserNameSearch("Kevin");
+		adminuserspage.click_OnSearchAdminUsersButton();
+		Assert.assertTrue(adminuserspage.searchAdminUsersButton_IsDisplayed());
+		
 	}
 }

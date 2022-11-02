@@ -64,7 +64,7 @@ public class Base
 		url=prop.getProperty("url");
 		initialize(browser,url);
 	}
-	@BeforeMethod(enabled=true)
+	@BeforeMethod(enabled=true,alwaysRun=true)
 	public void setUp()
 	{
 		String browser;
@@ -74,7 +74,7 @@ public class Base
 		initialize(browser,url);
 	}
 	
-	@AfterMethod
+	@AfterMethod(alwaysRun=true)
 	public void tearDown(ITestResult itestresult)
 	{
 		screenshot=new ScreenShot();

@@ -4,9 +4,11 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.supermarket.base.Base;
+import com.supermarket.base.DataProviderClass;
 import com.supermarket.constants.Constants;
 import com.supermarket.pages.LoginPage;
 import com.supermarket.pages.ManageExpensePage;
+import com.supermarket.pages.PushNotificationPage;
 import com.supermarket.utilities.Excel;
 
 public class ManageExpenseTest extends Base
@@ -14,7 +16,8 @@ public class ManageExpenseTest extends Base
 	LoginPage loginpage;
 	ManageExpensePage manageexpensepage;
 	Excel excel=new Excel();
-	@Test
+	
+	@Test(groups= {"smoke","sanity"})
 	public void verify_AddExpense()
 	{
 		String amount;
@@ -28,9 +31,13 @@ public class ManageExpenseTest extends Base
 		manageexpensepage=new ManageExpensePage(driver);
 		manageexpensepage.click_OnManageExpense();
 		manageexpensepage.add_Expense(amount,remarks);
-		
 		manageexpensepage.file_Upload(Constants.FILEUPLOAD_FILE_PATH + "\\File 1.doc");
 		manageexpensepage.click_OnSaveButton();
+		String expectedResult=Constants.EXPECTED_ALERT_TEXT3;
+		//String actualResult=manageexpensepage.get_alertTextMessage();
+		//System.out.println("The actual text alert message:" +actualResult);
+		//Assert.assertEquals(actualResult, expectedResult,"This testcase failed");
+		//Assert.assertTrue(manageexpensepage.searchListExpenseButton_IsEnabled());
 	}
 	@Test
 	public void verify_AddExpenseInTest()
@@ -46,6 +53,18 @@ public class ManageExpenseTest extends Base
 		//String actualResult=manageexpensepage.get_alertTextMessage();
 		//System.out.println("The actual text alert message:" +actualResult);
 		//Assert.assertEquals(actualResult, expectedResult,"This testcase failed");
+	}
+	@Test(dataProvider="manageExpense",dataProviderClass=DataProviderClass.class)
+	public void verify_AddExpenseByDataProviderClass(String Amount,String Remarks)
+	{
+		loginpage=new LoginPage(driver);
+		loginpage.login();
+		manageexpensepage=new ManageExpensePage(driver);
+		
+		manageexpensepage.add_Expense(Amount,Remarks);
+		manageexpensepage.scroll_DownPage();
+		manageexpensepage.file_Upload(Constants.FILEUPLOAD_FILE_PATH + "\\File 1.doc");
+		manageexpensepage.click_OnSaveButton();
 	}
 	@Test
 	public void verify_UpdateExpense()
@@ -84,6 +103,9 @@ public class ManageExpenseTest extends Base
 		manageexpensepage.search_ListExpense();
 		manageexpensepage.click_OnSearchListExpenseButton();
 		Assert.assertTrue(manageexpensepage.searchListExpenseButton_IsEnabled());
+		manageexpensepage.click_ReportButtonManageExpense();
+		manageexpensepage.get_TextNewWindowExpenseReport();
+		manageexpensepage.click_OnBackButton();
 	}
 	
 }

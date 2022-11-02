@@ -13,13 +13,13 @@ import com.supermarket.pages.LoginPage;
 public class LoginTest extends Base {
 	LoginPage loginpage;
 
-	@Test
+	@Test(groups="smoke")
 	public void verify_Login() 
 	{
 		loginpage=new LoginPage(driver);
 		loginpage.login();
 	}
-	@Test
+	@Test(groups="sanity")
 	public void verify_ProfileImageisDisplayed()
 	{
 		loginpage=new LoginPage(driver);

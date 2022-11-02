@@ -21,7 +21,7 @@ GeneralUtility generalutility;
 
 @FindBy(xpath="//i[@class='nav-icon fas fa-money-bill-alt']")
 private WebElement manageExpenseLink;
-@FindBy(xpath="//a[@href='https://groceryapp.uniqassosiates.com/admin/list-expense']")
+@FindBy(xpath="(//i[@class='far fa-circle nav-icon'])[2]")
 private WebElement subManageExpense;
 @FindBy(xpath="//a[@class='btn btn-rounded btn-danger']")
 private WebElement newButton;
@@ -69,6 +69,10 @@ private WebElement searchTitle;
 private WebElement searchListButton;
 @FindBy(xpath="//a[@class='btn btn-rounded btn-info']")
 private WebElement reportButton;
+@FindBy(xpath="//div[@class='col-sm-12']")
+private WebElement newWindowExpenseReport;
+@FindBy(xpath="//i[@class='fas fa-arrow-left']")
+private WebElement backButton;
 
 public ManageExpensePage(WebDriver driver)
 {
@@ -146,6 +150,10 @@ public void click_OnSearchButton()
 {
 	searchButton.click();
 }
+public void click_OnBackButton()
+{
+	backButton.click();
+}
 
 public void add_Expense(String Amount,String Remarks)
 {
@@ -162,6 +170,11 @@ public void add_Expense(String Amount,String Remarks)
 	scroll_DownPage();
 	//click_ChooseFile();
 }
+/*public String get_TextAlertMessage()
+{
+	generalutility=new GeneralUtility(driver);
+	return generalutility.get_Text();
+} */
 
 public void edit_ExpenseDetails(String titleName)
 {
@@ -214,16 +227,12 @@ public void search_ListExpense()
 	pageutility=new PageUtility(driver);
 	pageutility.select_ByIndex(5,searchUsers);
 	searchCategory.click();
-	pageutility=new PageUtility(driver);
 	pageutility.select_ByVisibleText("IceCreams",searchCategory);
 	searchExpenseType.click();
-	pageutility=new PageUtility(driver);
 	pageutility.select_ByVisibleText("Credit Cash",searchExpenseType);
 	searchOrderID.click();
-	pageutility=new PageUtility(driver);
 	pageutility.select_ByValue("9", searchOrderID);
 	searchPurchaseID.click();
-	pageutility=new PageUtility(driver);
 	pageutility.select_ByIndex(3,searchPurchaseID);
 }
 public void click_OnSearchListExpenseButton()
@@ -238,24 +247,32 @@ public boolean searchListExpenseButton_IsEnabled()
 {
 	generalutility=new GeneralUtility(driver);
 	return generalutility.is_Enabled(searchListButton);
-	
 }
-
-/*String parentWindow=driver.getWindowHandle();
-System.out.println(parentWindow);
-
-Set<String> windows=driver.getWindowHandles();
-System.out.println(windows.size());
-for(String childWindow:windows)
+public void click_ReportButtonManageExpense()
 {
+	pageutility.scroll_andClick(reportButton);
+	String parentWindow=driver.getWindowHandle();
+	System.out.println(parentWindow);
+
+	Set<String> windows=driver.getWindowHandles();
+	System.out.println(windows.size());
+	System.out.println(windows);
+	for(String childWindow:windows)
+	{
 	if(parentWindow.equals(childWindow))
 	{
-		System.out.println("No need to print");
+		System.out.println("No need to switch");
 		System.out.println(childWindow+""+parentWindow);
 	}
 	else
 	{
 		driver.switchTo().window(childWindow);
 	}
-}*/
+	}
+}
+public String get_TextNewWindowExpenseReport()
+{
+	generalutility=new GeneralUtility(driver);
+	return generalutility.get_Text(newWindowExpenseReport);
+} 
 }

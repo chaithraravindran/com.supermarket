@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [groupsrun]">
+  <listeners>
+    <listener class-name="com.supermarket.listeners.ExtendReporter"/>
+  </listeners>
+  <test name="buildverification(failed)">
+    <groups>
+      <run>
+        <include name="sanity"/>
+        <include name="smoke"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="com.supermarket.tests.DeliveryBoyTest">
+        <methods>
+          <include name="setUp"/>
+          <include name="tearDown"/>
+          <include name="verify_UpdateDeliveryBoy"/>
+        </methods>
+      </class> <!-- com.supermarket.tests.DeliveryBoyTest -->
+    </classes>
+  </test> <!-- buildverification(failed) -->
+</suite> <!-- Failed suite [groupsrun] -->

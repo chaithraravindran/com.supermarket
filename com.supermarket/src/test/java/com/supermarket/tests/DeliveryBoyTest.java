@@ -94,16 +94,16 @@ public class DeliveryBoyTest extends Base
 		deliveryboypage.click_OnDeliveryBoy();
 		deliveryboypage.deleteDeliveryBoy("Aimy");
 	}
-	@Test
+	@Test(groups= {"smoke","sanity"})
 	public void verify_UpdateDeliveryBoy()
 	{
 		loginpage=new LoginPage(driver);
 		loginpage.login();
 		deliveryboypage=new DeliveryBoyPage(driver);
 		deliveryboypage.click_OnDeliveryBoy();
-		deliveryboypage.edit_DeliveryBoy("Ammu");
+		deliveryboypage.edit_DeliveryBoy("Paddy");
 		deliveryboypage.clear_Field();
-		deliveryboypage.update_Field("ammu123@gmail.com");
+		deliveryboypage.update_Field("paddy123@gmail.com");
 	}
 	
 	

@@ -20,6 +20,8 @@ public class Constants
 	public static final String EXPECTED_ALERT_TEXT1="Alert!";
 	/**AdminUsersPage**/
 	public static final String EXPECTED_ALERT_TEXT2="Alert!";
+	/**ManageExpensePage**/
+	public static final String EXPECTED_ALERT_TEXT3="Alert!";
 	
 	/**Home page**/
 	

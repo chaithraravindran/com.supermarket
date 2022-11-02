@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="groupsrun">
+	<listeners>
+		<listener
+			class-name="com.supermarket.listeners.ExtendReporter"></listener>
+	</listeners>
+	<test name="buildverification">
+		<groups>
+			<run>
+				<include name="sanity"></include>
+				<include name="smoke"></include>
+			</run>
+		</groups>
+		<classes>
+			<class name="com.supermarket.tests.LoginTest">
+			</class>
+			<class name="com.supermarket.tests.DeliveryBoyTest">
+			</class>
+			<class name="com.supermarket.tests.ManageExpenseTest">
+			</class>
+		</classes>
+	</test>
+</suite>
