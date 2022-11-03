@@ -21,56 +21,79 @@ GeneralUtility generalutility;
 
 @FindBy(xpath="//i[@class='nav-icon fas fa-money-bill-alt']")
 private WebElement manageExpenseLink;
+
 @FindBy(xpath="(//i[@class='far fa-circle nav-icon'])[2]")
 private WebElement subManageExpense;
+
 @FindBy(xpath="//a[@class='btn btn-rounded btn-danger']")
 private WebElement newButton;
+
 @FindBy(xpath="//select[@id='user_id']")
 private WebElement user;
+
 @FindBy(xpath="//input[@id='ex_date']")
 private WebElement date;
+
 @FindBy(xpath="//select[@id='ex_cat']")
 private WebElement category;
+
 @FindBy(xpath="//select[@id='order_id']")
 private WebElement orderID;
+
 @FindBy(xpath="//select[@id='purchase_id']")
 private WebElement purchaseID;
+
 @FindBy(xpath="//select[@id='ex_type']")
 private WebElement expenseType;
+
 @FindBy(xpath="//input[@id='amount']")
 private WebElement amount;
+
 @FindBy(xpath="//textarea[@id='content']")
 private WebElement remarks;
+
 @FindBy(xpath="//input[@type='file']")
 private WebElement chooseFile;
+
 @FindBy(xpath="//button[@type='submit']")
 private WebElement saveButton;
 
-//@FindBy(xpath="(//tbody//tr[17]//td[9]//a)[1]")
-//private WebElement editButton;
+@FindBy(xpath="//div[@class='alert alert-success alert-dismissible']")
+private WebElement sucessAlertMessage;
+
 @FindBy(xpath="//button[@name='update']")
 private WebElement updateButton;
 
 @FindBy(xpath="//a[@class='btn btn-rounded btn-primary']")
 private WebElement searchButton;
+
 @FindBy(xpath="//select[@id='um']")
 private WebElement searchUsers;
+
 @FindBy(xpath="//select[@id='uc']")
 private WebElement searchCategory;
+
 @FindBy(xpath="//select[@id='od']")
 private WebElement searchOrderID;
+
 @FindBy(xpath="//select[@id='ty']")
 private WebElement searchExpenseType;
+
 @FindBy(xpath="//select[@id='pi']")
 private WebElement searchPurchaseID ;
+
 @FindBy(xpath="//input[@id='ti']")
 private WebElement searchTitle;
+
 @FindBy(xpath="//button[@class='btn btn-danger btn-fix']")
 private WebElement searchListButton;
+
 @FindBy(xpath="//a[@class='btn btn-rounded btn-info']")
 private WebElement reportButton;
+
 @FindBy(xpath="//div[@class='col-sm-12']")
 private WebElement newWindowExpenseReport;
+
 @FindBy(xpath="//i[@class='fas fa-arrow-left']")
 private WebElement backButton;
 
@@ -154,7 +177,6 @@ public void click_OnBackButton()
 {
 	backButton.click();
 }
-
 public void add_Expense(String Amount,String Remarks)
 {
 	click_OnManageExpense();
@@ -170,12 +192,21 @@ public void add_Expense(String Amount,String Remarks)
 	scroll_DownPage();
 	//click_ChooseFile();
 }
-/*public String get_TextAlertMessage()
+public String get_alertTextFontStyle()
 {
 	generalutility=new GeneralUtility(driver);
-	return generalutility.get_Text();
-} */
-
+	return generalutility.get_CssValue(sucessAlertMessage,"font-style");
+}
+public boolean is_alertTextMessageDisplayed()
+{
+	generalutility=new GeneralUtility(driver);
+	return generalutility.is_Displayed(sucessAlertMessage);
+}
+public String get_alertTextBackgroundColor()
+{
+	generalutility=new GeneralUtility(driver);
+	return generalutility.get_CssValue(sucessAlertMessage,"background-color");
+}
 public void edit_ExpenseDetails(String titleName)
 {
 	List<String> titleNames=new ArrayList<String>();
@@ -203,6 +234,11 @@ public void update_Field(String Amount)
 	enter_Amount(Amount);
 	click_OnUpdateButton();
 }
+public String get_alertTextFontWeight()
+{
+	generalutility=new GeneralUtility(driver);
+	return generalutility.get_CssValue(sucessAlertMessage,"font-weight");
+}
 public void delete_Expense(String titleName)
 {
 	List<String> titleNames=new ArrayList<String>();
@@ -220,6 +256,11 @@ public void delete_Expense(String titleName)
 	WebElement deleteButton=driver.findElement(By.xpath("(//tbody//tr["+i+"]//td[9]//a)[2]"));
 	deleteButton.click();
 	driver.switchTo().alert().accept();
+}
+public String get_FontFamilyAlertText()
+{
+	generalutility=new GeneralUtility(driver);
+	return generalutility.get_CssValue(sucessAlertMessage,"font-family");
 }
 public void search_ListExpense()
 {

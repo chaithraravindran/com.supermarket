@@ -33,11 +33,9 @@ public class ManageExpenseTest extends Base
 		manageexpensepage.add_Expense(amount,remarks);
 		manageexpensepage.file_Upload(Constants.FILEUPLOAD_FILE_PATH + "\\File 1.doc");
 		manageexpensepage.click_OnSaveButton();
-		String expectedResult=Constants.EXPECTED_ALERT_TEXT3;
-		//String actualResult=manageexpensepage.get_alertTextMessage();
-		//System.out.println("The actual text alert message:" +actualResult);
-		//Assert.assertEquals(actualResult, expectedResult,"This testcase failed");
-		//Assert.assertTrue(manageexpensepage.searchListExpenseButton_IsEnabled());
+		String expectedFontStyle=Constants.EXPECTED_FONT_STYLE_ALERT_TEXT5;
+		String actualFontStyle=manageexpensepage.get_alertTextFontStyle();
+		Assert.assertEquals(actualFontStyle, expectedFontStyle);
 	}
 	@Test
 	public void verify_AddExpenseInTest()
@@ -49,10 +47,7 @@ public class ManageExpenseTest extends Base
 		manageexpensepage.add_Expense("2000","Amount to be paid");
 		manageexpensepage.file_Upload(Constants.FILEUPLOAD_FILE_PATH + "\\IceCream.jpg");
 		manageexpensepage.click_OnSaveButton();
-		//String expectedResult=Constants.EXPECTED_ALERT_TEXT1;
-		//String actualResult=manageexpensepage.get_alertTextMessage();
-		//System.out.println("The actual text alert message:" +actualResult);
-		//Assert.assertEquals(actualResult, expectedResult,"This testcase failed");
+		Assert.assertTrue(manageexpensepage.is_alertTextMessageDisplayed());
 	}
 	@Test(dataProvider="manageExpense",dataProviderClass=DataProviderClass.class)
 	public void verify_AddExpenseByDataProviderClass(String Amount,String Remarks)
@@ -60,11 +55,13 @@ public class ManageExpenseTest extends Base
 		loginpage=new LoginPage(driver);
 		loginpage.login();
 		manageexpensepage=new ManageExpensePage(driver);
-		
 		manageexpensepage.add_Expense(Amount,Remarks);
 		manageexpensepage.scroll_DownPage();
 		manageexpensepage.file_Upload(Constants.FILEUPLOAD_FILE_PATH + "\\File 1.doc");
 		manageexpensepage.click_OnSaveButton();
+		String expectedBackGroundColor=Constants.EXPECTED_BACKGROUND_COLOR_ALERT_TEXT6;
+		String actualBackGroundColor=manageexpensepage.get_alertTextBackgroundColor();
+		Assert.assertEquals(actualBackGroundColor, expectedBackGroundColor);
 	}
 	@Test
 	public void verify_UpdateExpense()
@@ -75,9 +72,12 @@ public class ManageExpenseTest extends Base
 		manageexpensepage.click_OnManageExpense();
 		manageexpensepage.click_OnSubManageExpense();
 		manageexpensepage.scroll_DownPage();
-		manageexpensepage.edit_ExpenseDetails("Order-Bank-8 (Staff -ST)");
+		manageexpensepage.edit_ExpenseDetails("FruitNew (Staff-ST)");
 		manageexpensepage.clear_Field();
 		manageexpensepage.update_Field("3000");
+		String expectedFontWeight=Constants.EXPECTED_FONT_WEIGHT_ALERT_TEXT7;
+		String actualFontWeight=manageexpensepage.get_alertTextFontWeight();
+		Assert.assertEquals(actualFontWeight, expectedFontWeight);
 	}
 	@Test
 	public void verify_DeleteExpense()
@@ -88,10 +88,13 @@ public class ManageExpenseTest extends Base
 		manageexpensepage.click_OnManageExpense();
 		manageexpensepage.click_OnSubManageExpense();
 		manageexpensepage.scroll_DownPage();
-		manageexpensepage.delete_Expense("IceCreams (Admin2-AD)");
+		manageexpensepage.delete_Expense("IceCreams (Sumesh-PT)");
+		String expectedFontFamily=Constants.EXPECTED_FONT_Family_ALERT_TEXT8;
+		String actualFontFamily=manageexpensepage.get_FontFamilyAlertText();
+		Assert.assertEquals(actualFontFamily, expectedFontFamily);
 	}
 	@Test
-	public void verify_search()
+	public void verify_searchListExpense()
 	{
 		loginpage=new LoginPage(driver);
 		loginpage.login();

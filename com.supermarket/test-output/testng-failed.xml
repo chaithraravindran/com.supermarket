@@ -3,14 +3,14 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="com.supermarket.tests.ManagePaymentMethodsTest">
+      <class name="com.supermarket.tests.AdminUsersTest">
         <methods>
           <include name="setUp"/>
-          <include name="update_ManagePaymentMethods"/>
           <include name="setUpCrossBrowser"/>
           <include name="tearDown"/>
+          <include name="verify_UpdateAdminUser"/>
         </methods>
-      </class> <!-- com.supermarket.tests.ManagePaymentMethodsTest -->
+      </class> <!-- com.supermarket.tests.AdminUsersTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

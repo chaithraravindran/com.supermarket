@@ -21,25 +21,37 @@ GeneralUtility generalutility;
 
 @FindBy(xpath="//i[@class='nav-icon fas fa-map-marker']")
 private WebElement manageLocationLink;
+
 @FindBy(xpath="//a[@class='btn btn-rounded btn-danger']")
 private WebElement newButton;
+
 @FindBy(xpath="//select[@id='country_id']")
 private WebElement country;
+
 @FindBy(xpath="//select[@id='st_id']")
 private WebElement state;
+
 @FindBy(xpath="//input[@id='location']")
 private WebElement location;
+
 @FindBy(xpath="//input[@id='delivery']")
 private WebElement deliveryCharge;
+
 @FindBy(xpath="//button[text()='Save']")
 private WebElement saveButton;
+
+@FindBy(xpath="//div[@class='alert alert-success alert-dismissible']")
+private WebElement sucessAlertMessage;
+
 @FindBy(xpath="//a[@type='button']")
 private WebElement cancelButton;
+
 @FindBy(xpath="//button[@name='update']")
 private WebElement updateButton;
 
 @FindBy(xpath="//i[@class=' fa fa-search']")
 private WebElement searchButton;
+
 @FindBy(xpath="//button[@name='Search']")
 private WebElement searchLocationButton;
 
@@ -104,6 +116,11 @@ public void enterLocationDetails(String Location,String DeliveryCharge)
 	enter_DeliveryCharge(DeliveryCharge);
 	click_OnSaveButton();
 }
+public String get_colorAlertText()
+{
+	generalutility=new GeneralUtility(driver);
+	return generalutility.get_CssValue(sucessAlertMessage,"color");
+}
 public void enterLocationDetails_ClickCancel(String Location,String DeliveryCharge)
 {
 	click_OnManageLocation();
@@ -113,6 +130,11 @@ public void enterLocationDetails_ClickCancel(String Location,String DeliveryChar
 	enter_Location(Location);
 	enter_DeliveryCharge(DeliveryCharge);
 	click_OnCancelButton();
+}
+public String get_TextNewButton()
+{
+	generalutility=new GeneralUtility(driver);
+	return generalutility.get_Text(newButton);
 }
 public void deactivate_Location(String locationName)
 {
@@ -130,6 +152,11 @@ public void deactivate_Location(String locationName)
 	}
 	WebElement statusButton=driver.findElement(By.xpath("//tbody//tr["+j+"]//td[5]//a"));
 	statusButton.click();
+}
+public String get_sucessAlertTextBackgroundColor()
+{
+	generalutility=new GeneralUtility(driver);
+	return generalutility.get_CssValue(sucessAlertMessage,"background-color");
 }
 public void edit_LocationDetails(String locationName)
 {
@@ -158,6 +185,11 @@ public void update_Field(String Location)
 	enter_Location(Location);
 	click_OnUpdateButton();
 }
+public boolean is_alertTextMessageDisplayed()
+{
+	generalutility=new GeneralUtility(driver);
+	return generalutility.is_Displayed(sucessAlertMessage);
+}
 public void delete_Location(String locationName)
 {
 	List<String> locationNames=new ArrayList<String>();
@@ -176,6 +208,11 @@ public void delete_Location(String locationName)
 	deleteButton.click();
 	driver.switchTo().alert().accept();
 }
+public String get_alertTextFontSize()
+{
+	generalutility=new GeneralUtility(driver);
+	return generalutility.get_CssValue(sucessAlertMessage,"font-size");
+}
 public void search_Location(String Location)
 {
 	choose_Country();
@@ -183,8 +220,6 @@ public void search_Location(String Location)
 	enter_Location(Location);
 	click_OnSearchListLocationsButton();
 }
-
-
 public boolean searchListLocationButton_IsEnabled()
 {
 	generalutility=new GeneralUtility(driver);

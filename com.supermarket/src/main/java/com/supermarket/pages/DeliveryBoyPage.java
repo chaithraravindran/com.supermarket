@@ -1,6 +1,5 @@
 package com.supermarket.pages;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,8 +12,6 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.supermarket.utilities.Excel;
 import com.supermarket.utilities.GeneralUtility;
-
-
 
 public class DeliveryBoyPage 
 {
@@ -47,6 +44,9 @@ private WebElement passWord;
 
 @FindBy(xpath="//button[@type='submit']")
 private WebElement saveButton;
+
+@FindBy(xpath="//div[@class='alert alert-success alert-dismissible']")
+private WebElement sucessAlertMessage;
 
 @FindBy(xpath="//div[@class='alert alert-danger alert-dismissible']")
 private WebElement alertMessage;
@@ -123,10 +123,15 @@ public void create_DeliveryBoyDetails(String Name,String Email,String PhoneNumbe
 	enterPassword(PassWord);
 	saveLink();		
 }
-public String get_alertTextMessage()
+public String get_alertTextBackgroundColor()
 {
 	generalutility=new GeneralUtility(driver);
-	return generalutility.get_Text(alertMessage);
+	return generalutility.get_CssValue(alertMessage,"background-color");
+}
+public boolean is_alertTextMessageDisplayed()
+{
+	generalutility=new GeneralUtility(driver);
+	return generalutility.is_Displayed(alertMessage);
 }
 public String get_colorAlertText()
 {
@@ -149,7 +154,37 @@ public void deactivate_deliveryBoy(String deliveryBoyName)
 	}
 WebElement statusButton=driver.findElement(By.xpath("//tbody//tr["+j+"]//td[6]//a"));
 statusButton.click();
+generalutility=new GeneralUtility(driver);
 }
+public String get_sucessAlertTextBackgroundColor()
+{
+	generalutility=new GeneralUtility(driver);
+	return generalutility.get_CssValue(sucessAlertMessage,"background-color");
+}
+public void deleteDeliveryBoy(String deliveryBoyName)
+{
+	generalutility=new GeneralUtility(driver);
+	List<String> names=new ArrayList<String>();
+	int j=0;
+	names=generalutility.get_TextOfElements("//tbody//tr//td[1]");
+	for(j=0;j<names.size();j++)
+	{
+		if(deliveryBoyName.equals(names.get(j)))
+		{
+			j++;
+			break;
+		}
+	}
+WebElement deleteButton=driver.findElement(By.xpath("(//tbody//tr["+j+"]//td[8]//a)[2]"));
+deleteButton.click();
+driver.switchTo().alert().getText();
+driver.switchTo().alert().accept();
+}
+public String get_successAlertTextFontSize()
+{
+	generalutility=new GeneralUtility(driver);
+	return generalutility.get_CssValue(sucessAlertMessage,"font-size");
+} 
 public void edit_DeliveryBoy(String deliveryBoyName)
 {
 	generalutility=new GeneralUtility(driver);
@@ -172,31 +207,13 @@ public void clear_Field()
 	generalutility=new GeneralUtility(driver);
 	generalutility.clear_Text(email);
 }
+public boolean is_UpdateButtonEnabled()
+{
+	generalutility=new GeneralUtility(driver);
+	return generalutility.is_Enabled(updateButton);
+}
 public void update_Field(String Email)
 {
 	enterEmail(Email);
-	//click_OnUpdateButton();
 }
-
-public void deleteDeliveryBoy(String deliveryBoyName)
-{
-	generalutility=new GeneralUtility(driver);
-	List<String> names=new ArrayList<String>();
-	int j=0;
-	names=generalutility.get_TextOfElements("//tbody//tr//td[1]");
-	for(j=0;j<names.size();j++)
-	{
-		if(deliveryBoyName.equals(names.get(j)))
-		{
-			j++;
-			break;
-		}
-	}
-WebElement deleteButton=driver.findElement(By.xpath("(//tbody//tr["+j+"]//td[8]//a)[2]"));
-deleteButton.click();
-driver.switchTo().alert().getText();
-driver.switchTo().alert().accept();
-}
-
-
 }

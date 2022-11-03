@@ -10,7 +10,8 @@ import com.supermarket.base.DataProviderClass;
 import com.supermarket.constants.Constants;
 import com.supermarket.pages.LoginPage;
 
-public class LoginTest extends Base {
+public class LoginTest extends Base 
+{
 	LoginPage loginpage;
 
 	@Test(groups="smoke")
@@ -18,6 +19,7 @@ public class LoginTest extends Base {
 	{
 		loginpage=new LoginPage(driver);
 		loginpage.login();
+		Assert.assertTrue(loginpage.is_LogoEnabled());
 	}
 	@Test(groups="sanity")
 	public void verify_ProfileImageisDisplayed()
@@ -31,15 +33,9 @@ public class LoginTest extends Base {
 	{
 		loginpage=new LoginPage(driver);
 		loginpage.login("admin","123");
-		
-		//String expectedResult=Constants.EXPECTED_ALERT_TEXT0;
-		String expectedResult=Constants.EXPECTED_ALERT_TEXT;
-		/*String expectedResult="×\r\n" + 
-			"Alert!\r\n" + 
-			"Invalid Username/Password";*/
-		String actualResult=loginpage.get_InvalidLoginAlertMessage();
-		System.out.println("The actual text alert message:" +actualResult);
-		Assert.assertEquals(actualResult, expectedResult,"This testcase failed");
+		String expectedText=Constants.EXPECTED_ALERT_TEXT;
+		String actualText=loginpage.get_TextInvalidLoginAlert();
+		Assert.assertEquals(actualText, expectedText,"This testcase failed");
 	}
 	
 	

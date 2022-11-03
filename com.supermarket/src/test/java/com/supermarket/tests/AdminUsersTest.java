@@ -26,12 +26,11 @@ public class AdminUsersTest extends Base
 		excel.setExcelFile("Admin Users Details", "AdminUsersInformations");
 		userName=excel.getCellData(1,0);
 		passWord=excel.getCellData(1,1);
-		
-		
 		loginpage=new LoginPage(driver);
 		loginpage.login();
 		adminuserspage=new AdminUsersPage(driver);
 		adminuserspage.AdminUserDetails(userName,passWord);
+		Assert.assertTrue(adminuserspage.is_alertTextMessageDisplayed());
 	}
 	@Test
 	public void verify_addNewAdminUserAlertMessage()
@@ -39,11 +38,11 @@ public class AdminUsersTest extends Base
 		loginpage=new LoginPage(driver);
 		loginpage.login();
 		adminuserspage=new AdminUsersPage(driver);
-		adminuserspage.AdminUserDetails("Michael","mike@gmail");
-		String expectedResult=Constants.EXPECTED_ALERT_TEXT2;
-		String actualResult=adminuserspage.get_SucessAlertTextMessage();
-		System.out.println("The actual text alert message:" +actualResult);
-		Assert.assertEquals(actualResult, expectedResult,"This testcase failed");
+		adminuserspage.AdminUserDetails("user1667460243206","password123");
+		String expectedText=Constants.EXPECTED_ALERT_TEXT15;
+		String actualText=adminuserspage.get_TextAlertMessage();
+		System.out.println("The actual text alert message:" +actualText);
+		Assert.assertEquals(actualText, expectedText,"This testcase failed");
 	}
 	@Test(dataProvider="adminUsers",dataProviderClass=DataProviderClass.class)
 	public void verify_AddAdminUsersByDataProviderClass(String UserName,String PassWord)
@@ -52,18 +51,10 @@ public class AdminUsersTest extends Base
 		loginpage.login();
 		adminuserspage=new AdminUsersPage(driver);
 		adminuserspage.AdminUserDetails(UserName,PassWord);
-	}
-	@Test
-	public void verify_existingAdminUsersAlertMessage()
-	{
-		loginpage=new LoginPage(driver);
-		loginpage.login();
-		adminuserspage=new AdminUsersPage(driver);
-		adminuserspage.AdminUserDetails("Nike","nike@gmail");
-		String expectedResult=Constants.EXPECTED_ALERT_TEXT2;
-		String actualResult=adminuserspage.get_AlertTextMessage();
-		System.out.println("The actual text alert message:" +actualResult);
-		Assert.assertEquals(actualResult, expectedResult,"This testcase failed");
+		adminuserspage.get_BackGroundColorAlertText();
+		String expectedBackGroundColor=Constants.EXPECTED_BACKGROUND_COLOR_ALERT_TEXT16;
+		String actualBackGroundColor=adminuserspage.get_BackGroundColorAlertText();
+		Assert.assertEquals(actualBackGroundColor, expectedBackGroundColor);
 	}
 	@Test
 	public void verify_backgroundColorofExistingAdminUsersAlertMessage()
@@ -71,10 +62,10 @@ public class AdminUsersTest extends Base
 		loginpage=new LoginPage(driver);
 		loginpage.login();
 		adminuserspage=new AdminUsersPage(driver);
-		adminuserspage.AdminUserDetails("Nike","nike@gmail");
-		adminuserspage.get_AlertTextMessage();
+		adminuserspage.AdminUserDetails("user1667460243206","password123");
+		adminuserspage.get_TextAlertMessage();
+		String expectedBackgroundColor=Constants.EXPECTED_BACKGROUND_COLOR_ALERT_TEXT17;
 		String actualBackgroundColor=adminuserspage.get_BackGroundColorAlertText();
-		String expectedBackgroundColor="rgba(220, 53, 69, 1)";
 		Assert.assertEquals(actualBackgroundColor, expectedBackgroundColor);
 	}
 	@Test
@@ -84,7 +75,8 @@ public class AdminUsersTest extends Base
 		loginpage.login();
 		adminuserspage=new AdminUsersPage(driver);
 		adminuserspage.click_OnAdminUsers();
-		adminuserspage.deactivate_statusAdminUser("Ann");
+		adminuserspage.deactivate_statusAdminUser("Kim");
+		Assert.assertTrue(adminuserspage.is_SucessAlertTextMessageDisplayed());
 	}
 	@Test
 	public void verify_adminUserActionButtonDeactivation()
@@ -93,7 +85,10 @@ public class AdminUsersTest extends Base
 		loginpage.login();
 		adminuserspage=new AdminUsersPage(driver);
 		adminuserspage.click_OnAdminUsers();
-		adminuserspage.deactivate_actionButtonAdminUser("Mike");
+		adminuserspage.deactivate_actionButtonAdminUser("sji1990");
+		String expectedFontSize=Constants.EXPECTED_FONT_SIZE_ALERT_TEXT18;
+		String actualFontSize=adminuserspage.get_successAlertTextFontSize();
+		Assert.assertEquals(actualFontSize, expectedFontSize);
 	}
 	@Test
 	public void verify_deleteAdminUser()
@@ -102,7 +97,10 @@ public class AdminUsersTest extends Base
 		loginpage.login();
 		adminuserspage=new AdminUsersPage(driver);
 		adminuserspage.click_OnAdminUsers();
-		adminuserspage.deleteAdminUser("user100");
+		adminuserspage.deleteAdminUser("user19971667460509876");
+		String expectedFontWeight=Constants.EXPECTED_FONT_WEIGHT_ALERT_TEXT19;
+		String actualFontWeight=adminuserspage.get_alertTextFontWeight();
+		Assert.assertEquals(actualFontWeight, expectedFontWeight);
 	}
 	@Test
 	public void verify_UpdateAdminUser()
@@ -111,9 +109,10 @@ public class AdminUsersTest extends Base
 		loginpage.login();
 		adminuserspage=new AdminUsersPage(driver);
 		adminuserspage.click_OnAdminUsers();
-		adminuserspage.edit_AdminUser("Ian");
+		adminuserspage.edit_AdminUser("Jack");
 		adminuserspage.clear_Field();
-		adminuserspage.update_Field("Ian Jackson");
+		adminuserspage.update_Field("Jackson");
+		Assert.assertTrue(adminuserspage.is_UpdateButtonEnabled());
 	}
 	@Test
 	public void verify_search()
@@ -123,9 +122,8 @@ public class AdminUsersTest extends Base
 		adminuserspage=new AdminUsersPage(driver);
 		adminuserspage.click_OnAdminUsers();
 		adminuserspage.click_OnSearchButton();
-		adminuserspage.enter_UserNameSearch("Kevin");
+		adminuserspage.enter_UserNameSearch("Kim");
 		adminuserspage.click_OnSearchAdminUsersButton();
 		Assert.assertTrue(adminuserspage.searchAdminUsersButton_IsDisplayed());
-		
 	}
 }

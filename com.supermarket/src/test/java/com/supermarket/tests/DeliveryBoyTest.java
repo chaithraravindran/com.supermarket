@@ -39,30 +39,18 @@ public class DeliveryBoyTest extends Base
 		loginpage.login();
 		deliveryboypage=new DeliveryBoyPage(driver);
 		deliveryboypage.create_DeliveryBoyDetails(name,email,phoneNumber,address,userName,passWord);
+		String expectedBackGroundColor=Constants.EXPECTED_BACKGROUND_COLOR_ALERT_TEXT1;
+		String actualBackGroundColor=deliveryboypage.get_alertTextBackgroundColor();
+		Assert.assertEquals(actualBackGroundColor, expectedBackGroundColor);
 	}
 	@Test
-	public void verify_addNewDeliveryBoyAlertMessage()
+	public void verify_addNewDeliveryBoyAlertMessageIsDisplayed()
 	{
 		loginpage=new LoginPage(driver);
 		loginpage.login();
 		deliveryboypage=new DeliveryBoyPage(driver);
 		deliveryboypage.create_DeliveryBoyDetails("Paddy","paddy123@gmail","9366931523","Nest","paddy189","lis4686");
-		String expectedResult=Constants.EXPECTED_ALERT_TEXT1;
-		String actualResult=deliveryboypage.get_alertTextMessage();
-		System.out.println("The actual text alert message:" +actualResult);
-		Assert.assertEquals(actualResult, expectedResult,"This testcase failed");
-	}
-	@Test
-	public void verify_existingDeliveryBoyAlertMessage()
-	{
-		loginpage=new LoginPage(driver);
-		loginpage.login();
-		deliveryboypage=new DeliveryBoyPage(driver);
-		deliveryboypage.create_DeliveryBoyDetails("Anoop","anu123@gmail","9856987523","gdgsfsbytf","kdrcfd5987","whhfdd");
-		String expectedResult=Constants.EXPECTED_ALERT_TEXT1;
-		String actualResult=deliveryboypage.get_alertTextMessage();
-		System.out.println("The actual text alert message:" +actualResult);
-		Assert.assertEquals(actualResult, expectedResult,"This testcase failed");
+		Assert.assertTrue(deliveryboypage.is_alertTextMessageDisplayed());
 	}
 	@Test
 	public void verify_alertMessageFontColor()
@@ -71,9 +59,8 @@ public class DeliveryBoyTest extends Base
 		loginpage.login();
 		deliveryboypage=new DeliveryBoyPage(driver);
 		deliveryboypage.create_DeliveryBoyDetails("Anoop","anu123@gmail","9856987523","gdgsfsbytf","kdrcfd5987","whhfdd");
-		deliveryboypage.get_alertTextMessage();
+		String expectedColor=Constants.EXPECTED_COLOR_ALERT_TEXT2;
 		String actualColor=deliveryboypage.get_colorAlertText();
-		String expectedColor="rgba(255, 255, 255, 1)";
 		Assert.assertEquals(actualColor, expectedColor);
 	}
 	@Test
@@ -83,7 +70,10 @@ public class DeliveryBoyTest extends Base
 		loginpage.login();
 		deliveryboypage=new DeliveryBoyPage(driver);
 		deliveryboypage.click_OnDeliveryBoy();
-		deliveryboypage.deactivate_deliveryBoy("ann");
+		deliveryboypage.deactivate_deliveryBoy("Suju");
+		String expectedBackGroundColor=Constants.EXPECTED_BACKGROUND_COLOR_ALERT_TEXT3;
+		String actualBackGroundColor=deliveryboypage.get_sucessAlertTextBackgroundColor();
+		Assert.assertEquals(actualBackGroundColor, expectedBackGroundColor);
 	}
 	@Test
 	public void verify_deleteDeliveryBoy()
@@ -92,7 +82,10 @@ public class DeliveryBoyTest extends Base
 		loginpage.login();
 		deliveryboypage=new DeliveryBoyPage(driver);
 		deliveryboypage.click_OnDeliveryBoy();
-		deliveryboypage.deleteDeliveryBoy("Aimy");
+		deliveryboypage.deleteDeliveryBoy("James");
+		String expectedFontSize=Constants.EXPECTED_FONT_SIZE_ALERT_TEXT4;
+		String actualFontSize=deliveryboypage.get_successAlertTextFontSize();
+		Assert.assertEquals(actualFontSize, expectedFontSize);
 	}
 	@Test(groups= {"smoke","sanity"})
 	public void verify_UpdateDeliveryBoy()
@@ -101,9 +94,11 @@ public class DeliveryBoyTest extends Base
 		loginpage.login();
 		deliveryboypage=new DeliveryBoyPage(driver);
 		deliveryboypage.click_OnDeliveryBoy();
-		deliveryboypage.edit_DeliveryBoy("Paddy");
+		deliveryboypage.edit_DeliveryBoy("Anoopa");
 		deliveryboypage.clear_Field();
-		deliveryboypage.update_Field("paddy123@gmail.com");
+		deliveryboypage.update_Field("anoopa123@gmail.com");
+		Assert.assertTrue(deliveryboypage.is_UpdateButtonEnabled());
+		//deliveryboypage.click_OnUpdateButton();
 	}
 	
 	

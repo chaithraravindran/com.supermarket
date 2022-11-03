@@ -28,8 +28,7 @@ private WebElement descriptionField;
 private WebElement sendButton;
 
 @FindBy(xpath="//div[@class='alert alert-success alert-dismissible']")
-private WebElement alertSuccessMessage;
-
+private WebElement successAlertMessage;
 
 
 public PushNotificationPage(WebDriver driver)
@@ -54,15 +53,11 @@ public void click_onSendButton()
 	sendButton.click();
 }
 
-/*public String getText_SucessAlertPushNotification(String title,String description)
+public String get_sucessAlertTextBackgroundColor()
 {
-	click_OnPushNotification();
-	enter_title(title);
-	enter_description(description);
-	click_onSendButton();
 	generalutility=new GeneralUtility(driver);
-	return generalutility.get_Text(alertSuccessMessage);
-}*/
+	return generalutility.get_CssValue(successAlertMessage,"background-color");
+}
 public void add_PushNotificationsInformations(String title,String description)
 {
 	click_OnPushNotification();
@@ -73,7 +68,7 @@ public void add_PushNotificationsInformations(String title,String description)
 public String getText_SuccessAlertPushNotificationMessage()
 {
 	generalutility=new GeneralUtility(driver);
-	return generalutility.get_Text(alertSuccessMessage);
+	return generalutility.get_Text(successAlertMessage);
 }
 
 
