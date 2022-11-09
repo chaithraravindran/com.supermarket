@@ -1,32 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="8" total="9" passed="1">
+<testng-results skipped="0" failed="0" ignored="0" total="2" passed="2">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="23900" started-at="2022-11-03T18:24:48Z" finished-at="2022-11-03T18:25:12Z">
+  <suite name="Default suite" duration-ms="63323" started-at="2022-11-09T18:57:05Z" finished-at="2022-11-09T18:58:09Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="23900" started-at="2022-11-03T18:24:48Z" finished-at="2022-11-03T18:25:12Z">
-      <class name="com.supermarket.tests.AdminUsersTest">
-        <test-method status="PASS" signature="setUp()[pri:0, instance:com.supermarket.tests.AdminUsersTest@6c49835d]" name="setUp" is-config="true" duration-ms="19898" started-at="2022-11-03T23:54:48Z" finished-at="2022-11-03T23:55:08Z">
+    <test name="Default test" duration-ms="63323" started-at="2022-11-09T18:57:05Z" finished-at="2022-11-09T18:58:09Z">
+      <class name="com.supermarket.tests.ManagePaymentMethodsTest">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:com.supermarket.tests.ManagePaymentMethodsTest@30b8a058]" name="setUp" is-config="true" duration-ms="32004" started-at="2022-11-10T00:27:05Z" finished-at="2022-11-10T00:27:37Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="verify_search()[pri:0, instance:com.supermarket.tests.AdminUsersTest@6c49835d]" name="verify_search" duration-ms="3982" started-at="2022-11-03T23:55:08Z" finished-at="2022-11-03T23:55:12Z">
+        <test-method status="PASS" signature="verify_UpdateAdminUser()[pri:1, instance:com.supermarket.tests.ManagePaymentMethodsTest@30b8a058]" name="verify_UpdateAdminUser" duration-ms="4266" started-at="2022-11-10T00:27:37Z" finished-at="2022-11-10T00:27:42Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- verify_search -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.supermarket.tests.AdminUsersTest@6c49835d]" name="tearDown" is-config="true" duration-ms="2" started-at="2022-11-03T23:55:12Z" finished-at="2022-11-03T23:55:12Z">
+        </test-method> <!-- verify_UpdateAdminUser -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.supermarket.tests.ManagePaymentMethodsTest@30b8a058]" name="tearDown" is-config="true" duration-ms="2" started-at="2022-11-10T00:27:42Z" finished-at="2022-11-10T00:27:42Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=verify_search status=SUCCESS method=AdminUsersTest.verify_search()[pri:0, instance:com.supermarket.tests.AdminUsersTest@6c49835d] output={null}]]]>
+                <![CDATA[[TestResult name=verify_UpdateAdminUser status=SUCCESS method=ManagePaymentMethodsTest.verify_UpdateAdminUser()[pri:1, instance:com.supermarket.tests.ManagePaymentMethodsTest@30b8a058] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-      </class> <!-- com.supermarket.tests.AdminUsersTest -->
+        <test-method status="PASS" signature="setUp()[pri:0, instance:com.supermarket.tests.ManagePaymentMethodsTest@30b8a058]" name="setUp" is-config="true" duration-ms="23898" started-at="2022-11-10T00:27:42Z" finished-at="2022-11-10T00:28:06Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="verify_ManagePaymentStatusDeactivation()[pri:2, instance:com.supermarket.tests.ManagePaymentMethodsTest@30b8a058]" name="verify_ManagePaymentStatusDeactivation" duration-ms="3130" started-at="2022-11-10T00:28:06Z" finished-at="2022-11-10T00:28:09Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verify_ManagePaymentStatusDeactivation -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.supermarket.tests.ManagePaymentMethodsTest@30b8a058]" name="tearDown" is-config="true" duration-ms="0" started-at="2022-11-10T00:28:09Z" finished-at="2022-11-10T00:28:09Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=verify_ManagePaymentStatusDeactivation status=SUCCESS method=ManagePaymentMethodsTest.verify_ManagePaymentStatusDeactivation()[pri:2, instance:com.supermarket.tests.ManagePaymentMethodsTest@30b8a058] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- com.supermarket.tests.ManagePaymentMethodsTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

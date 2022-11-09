@@ -21,18 +21,22 @@ public class Constants
 	
 	public static final String EXPECTED_COLOR_ALERT_TEXT2="rgba(255, 255, 255, 1)";
 	
-	public static final String EXPECTED_BACKGROUND_COLOR_ALERT_TEXT3="rgba(40, 167, 69, 1)";
+	public static final String EXPECTED_DEACTIVATION_STATUS_ALERT="alert alert-success alert-dismissible";
 	
 	public static final String EXPECTED_FONT_SIZE_ALERT_TEXT4="16px";
 	
+	public static final String EXPECTED_UPDATED_ALERT_TEXT="alert alert-success alert-dismissible";
+	
+	public static final String EXPECTED_BACKGROUND_COLOR_ALERT_TEXT5="rgba(40, 167, 69, 1)";
+	
 	/**ManageExpensePage**/
-	public static final String EXPECTED_FONT_STYLE_ALERT_TEXT5="normal";
+	public static final String  EXPECTED_ALERT_TEXT_VALUE5="alert alert-success alert-dismissible";
 	
 	public static final String EXPECTED_BACKGROUND_COLOR_ALERT_TEXT6="rgba(40, 167, 69, 1)";
 	
-	public static final String EXPECTED_FONT_WEIGHT_ALERT_TEXT7="400";
-	
-	public static final String EXPECTED_FONT_Family_ALERT_TEXT8="\"Source Sans Pro\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"";
+	public static final String EXPECTED_ALERT_TEXT7="alert alert-success alert-dismissible";
+		
+	public static final String EXPECTED_ALERT_TEXT8="Expense Report";
 	
 	/**ManageLocationPage**/
 	public static final String EXPECTED_COLOR_ALERT_TEXT9="rgba(255, 255, 255, 1)";
@@ -47,18 +51,24 @@ public class Constants
 	public static final String EXPECTED_COLOR_ALERT_TEXT13="rgba(255, 255, 255, 1)";
 	
 	/**PushNotificationPage**/
+		
+	public static final String EXPECTED_ALERT_TEXT_VALUE="alert alert-success alert-dismissible";
+	
 	public static final String EXPECTED_BACKGROUND_COLOR_ALERT_TEXT14="rgba(40, 167, 69, 1)";
 		/**AdminUsersPage**/
-	public static final String EXPECTED_ALERT_TEXT15="×\r\n" + 
-			"Alert!\r\n" + 
-			"Username already exists.";
+	public static final String EXPECTED_ALERT_TEXT_VALUE15="alert alert-success alert-dismissible";
+	
 	public static final String EXPECTED_BACKGROUND_COLOR_ALERT_TEXT16="rgba(220, 53, 69, 1)";
 	
-	public static final String EXPECTED_BACKGROUND_COLOR_ALERT_TEXT17="rgba(220, 53, 69, 1)";
+	public static final String EXPECTED_ALERT_TEXT_VALUE17="alert alert-success alert-dismissible";
 	
-	public static final String EXPECTED_FONT_SIZE_ALERT_TEXT18="16px";
+	public static final String EXPECTED_FONT_WEIGHT_ALERT_TEXT18="400";
 	
-	public static final String EXPECTED_FONT_WEIGHT_ALERT_TEXT19="400";
-	/**Home page**/
+	public static final String EXPECTED_ALERT_TEXT19="alert alert-success alert-dismissible";
 	
+	public static final String EXPECTED_SEARCH_Name20="Bin_";
+	
+	/**ManageUsersPage**/
+	
+	public static final String EXPECTED_TEXT21=".........RESULT NOT FOUND.......";
 }

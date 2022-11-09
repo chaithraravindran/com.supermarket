@@ -13,7 +13,7 @@ public class ManagePaymentMethodsTest extends Base
 {
 	LoginPage loginpage;
 	ManagePaymentMethodsPage managepaymentmethodspage;
-	@Test
+	@Test(priority=2)
 	public void verify_ManagePaymentStatusDeactivation()
 	{
 		loginpage=new LoginPage(driver);
@@ -22,7 +22,7 @@ public class ManagePaymentMethodsTest extends Base
 		managepaymentmethodspage.click_OnDeactivate_StatusManagePaymentButton("debit card");
 		Assert.assertTrue(managepaymentmethodspage.is_StatusAlertTextMessageDisplayed());
 	}
-	@Test
+	@Test(priority=1)
 	public void verify_UpdateAdminUser()
 	{
 		loginpage=new LoginPage(driver);

@@ -1,6 +1,8 @@
 package com.supermarket.utilities;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -29,6 +31,10 @@ public boolean is_Enabled(WebElement element)
 public String get_Text(WebElement element)
 {
 	return element.getText();
+}
+public String get_Attribute(WebElement element, String value)
+{
+	return element.getAttribute(value);
 }
 public List<String> get_TextOfElements(String xpath)
 {
@@ -59,6 +65,11 @@ public String get_CssValue(WebElement element, String value)
 public void clear_Text(WebElement element)
 {
 	 element.clear();
+}
+public static String get_TimeStamp()
+{
+	String timeStamp=new SimpleDateFormat("dd_MM-yyyy_hh_mm_ss").format(new Date());
+	return timeStamp;
 }
 
 	

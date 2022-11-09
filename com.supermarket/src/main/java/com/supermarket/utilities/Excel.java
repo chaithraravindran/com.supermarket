@@ -58,5 +58,17 @@ public class Excel {
 		}
 
 	}
+	public Object[][] get_MultiDimensionalObjectArray(int row, int col)
+	{
+		Object data[][]=new Object[row][col];
+		for(int i=0;i<row;i++)
+		{
+			for(int j=0;j<col;j++)
+			{
+				data[i][j]=getCellData(i,j);
+			}
+		}
+		return data;
+	}
 
 }

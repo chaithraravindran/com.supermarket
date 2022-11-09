@@ -1,5 +1,8 @@
 package com.supermarket.pages;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,10 +13,8 @@ import com.supermarket.utilities.GeneralUtility;
 
 public class PushNotificationPage 
 {
-	
 WebDriver driver;
 GeneralUtility generalutility;
-
 
 @FindBy(xpath="//i[@class='nav-icon fas fa-fas fa-bell']")
 private WebElement pushNotificationLink;
@@ -29,7 +30,6 @@ private WebElement sendButton;
 
 @FindBy(xpath="//div[@class='alert alert-success alert-dismissible']")
 private WebElement successAlertMessage;
-
 
 public PushNotificationPage(WebDriver driver)
 {
@@ -52,29 +52,29 @@ public void click_onSendButton()
 {
 	sendButton.click();
 }
-
+public String visibilityOfSucessAlertMessage()
+{
+	generalutility=new GeneralUtility(driver);
+	return generalutility.get_Attribute(successAlertMessage,"class");
+}
+public void add_PushNotificationsInformations(String title,String description)
+{
+	List<String> list=new ArrayList<>();
+	list.add(title);
+	list.add(description);
+	enter_title(list.get(0));
+	enter_description(list.get(1));
+}
 public String get_sucessAlertTextBackgroundColor()
 {
 	generalutility=new GeneralUtility(driver);
 	return generalutility.get_CssValue(successAlertMessage,"background-color");
-}
-public void add_PushNotificationsInformations(String title,String description)
-{
-	click_OnPushNotification();
-	enter_title(title);
-	enter_description(description);
-	click_onSendButton();
 }
 public String getText_SuccessAlertPushNotificationMessage()
 {
 	generalutility=new GeneralUtility(driver);
 	return generalutility.get_Text(successAlertMessage);
 }
-
-
-
-
-	
 }
 
 

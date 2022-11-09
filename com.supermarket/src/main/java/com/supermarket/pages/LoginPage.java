@@ -2,6 +2,7 @@ package com.supermarket.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -13,13 +14,13 @@ public class LoginPage
 WebDriver driver;
 Excel excel=new Excel();
 GeneralUtility generalutility;
-
+@CacheLookup
 @FindBy(xpath="//input[@name='username']")
 private WebElement userName;
-
+@CacheLookup
 @FindBy(xpath="//input[@name='password']")
 private WebElement password;
-
+@CacheLookup
 @FindBy(xpath="//button[@class='btn btn-dark btn-block']")
 private WebElement signIn;
 
@@ -57,11 +58,9 @@ public void login(String UserName, String Password)
 }
 public void login()
 {
-	String userName;
-	String password;
 	excel.setExcelFile("Login","ValidLoginCredentials");
-	userName=excel.getCellData(0, 0);
-	password=excel.getCellData(0, 1);
+	String userName=excel.getCellData(0, 0);
+	String password=excel.getCellData(0, 1);
 	login(userName,password);
 }
 public boolean is_LogoEnabled()

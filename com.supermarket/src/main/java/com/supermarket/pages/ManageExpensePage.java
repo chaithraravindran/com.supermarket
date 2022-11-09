@@ -67,6 +67,9 @@ private WebElement updateButton;
 @FindBy(xpath="//a[@class='btn btn-rounded btn-primary']")
 private WebElement searchButton;
 
+@FindBy(xpath="//tbody//tr//td[1]")
+private WebElement searchedTitle;
+
 @FindBy(xpath="//select[@id='um']")
 private WebElement searchUsers;
 
@@ -88,10 +91,10 @@ private WebElement searchTitle;
 @FindBy(xpath="//button[@class='btn btn-danger btn-fix']")
 private WebElement searchListButton;
 
-@FindBy(xpath="//a[@class='btn btn-rounded btn-info']")
+@FindBy(xpath="//a[@type='submit']")
 private WebElement reportButton;
 
-@FindBy(xpath="//div[@class='col-sm-12']")
+@FindBy(xpath="//h4[text()='Expense Report']")
 private WebElement newWindowExpenseReport;
 
 @FindBy(xpath="//i[@class='fas fa-arrow-left']")
@@ -114,30 +117,30 @@ public void click_OnNewButton()
 {
 	newButton.click();
 }
-public void select_User()
+public void select_User(int a)
 {
 	pageutility=new PageUtility(driver);
-	pageutility.select_ByIndex(3,user);
+	pageutility.select_ByIndex(a,user);
 }
-public void select_Category()
+public void select_Category(String Category)
 {
 	pageutility=new PageUtility(driver);
-	pageutility.select_ByVisibleText("IceCreams",category);
+	pageutility.select_ByVisibleText(Category,category);
 }
-public void select_OrderID()
+public void select_OrderID(String Order_ID)
 {
 	pageutility=new PageUtility(driver);
-	pageutility.select_ByValue("8", orderID);
+	pageutility.select_ByValue(Order_ID, orderID);
 }
-public void select_PurchseID()
+public void select_PurchaseID(int b)
 {
 	pageutility=new PageUtility(driver);
-	pageutility.select_ByIndex(6,purchaseID);
+	pageutility.select_ByIndex(b,purchaseID);
 }
-public void select_ExpenseType()
+public void select_ExpenseType(String Expense_Type)
 {
 	pageutility=new PageUtility(driver);
-	pageutility.select_ByVisibleText("Debit Cash",expenseType);
+	pageutility.select_ByVisibleText(Expense_Type,expenseType);
 }
 public void enter_Amount(String Amount)
 {
@@ -147,10 +150,10 @@ public void enter_Remarks(String Remarks)
 {
 	remarks.sendKeys(Remarks);
 }
-public void scroll_DownPage()
+public void scroll_DownPage(int a,int b)
 {
 	pageutility=new PageUtility(driver);
-	pageutility.scroll_DownJSExecutor(0,6000);
+	pageutility.scroll_DownJSExecutor(a,b);
 }
 public void click_ChooseFile()
 {
@@ -173,29 +176,31 @@ public void click_OnSearchButton()
 {
 	searchButton.click();
 }
+public void enter_SearchTitleField(String Title)
+{
+	searchTitle.sendKeys(Title);
+}
 public void click_OnBackButton()
 {
 	backButton.click();
 }
-public void add_Expense(String Amount,String Remarks)
+public void add_Expense(int a,String Category,String Order_ID,int b,String Expense_Type,String Amount,String Remarks)
 {
 	click_OnManageExpense();
 	click_OnSubManageExpense();
 	click_OnNewButton();
-	select_User();
-	select_Category();
-	select_OrderID();
-	select_PurchseID();
-	select_ExpenseType();
+	select_User(a);
+	select_Category(Category);
+	select_OrderID(Order_ID);
+	select_PurchaseID(b);
+	select_ExpenseType(Expense_Type);
 	enter_Amount(Amount);
 	enter_Remarks(Remarks);
-	scroll_DownPage();
-	//click_ChooseFile();
 }
-public String get_alertTextFontStyle()
+public String visibilityOfSucessAlertMessage()
 {
 	generalutility=new GeneralUtility(driver);
-	return generalutility.get_CssValue(sucessAlertMessage,"font-style");
+	return generalutility.get_Attribute(sucessAlertMessage,"class");
 }
 public boolean is_alertTextMessageDisplayed()
 {
@@ -234,11 +239,6 @@ public void update_Field(String Amount)
 	enter_Amount(Amount);
 	click_OnUpdateButton();
 }
-public String get_alertTextFontWeight()
-{
-	generalutility=new GeneralUtility(driver);
-	return generalutility.get_CssValue(sucessAlertMessage,"font-weight");
-}
 public void delete_Expense(String titleName)
 {
 	List<String> titleNames=new ArrayList<String>();
@@ -257,41 +257,22 @@ public void delete_Expense(String titleName)
 	deleteButton.click();
 	driver.switchTo().alert().accept();
 }
-public String get_FontFamilyAlertText()
+public boolean searchedTitleInListExpense_IsDisplayed()
 {
 	generalutility=new GeneralUtility(driver);
-	return generalutility.get_CssValue(sucessAlertMessage,"font-family");
+	return generalutility.is_Displayed(searchedTitle);
 }
-public void search_ListExpense()
+public void enter_SearchListExpenseDetails(String Title)
 {
-	searchUsers.click();
-	pageutility=new PageUtility(driver);
-	pageutility.select_ByIndex(5,searchUsers);
-	searchCategory.click();
-	pageutility.select_ByVisibleText("IceCreams",searchCategory);
-	searchExpenseType.click();
-	pageutility.select_ByVisibleText("Credit Cash",searchExpenseType);
-	searchOrderID.click();
-	pageutility.select_ByValue("9", searchOrderID);
-	searchPurchaseID.click();
-	pageutility.select_ByIndex(3,searchPurchaseID);
+	enter_SearchTitleField(Title);
 }
 public void click_OnSearchListExpenseButton()
 {
-	pageutility.scroll_andClick(searchListButton);
-}
-public void enter_SearchTitle(String title)
-{
-	searchTitle.sendKeys(title);
-}
-public boolean searchListExpenseButton_IsEnabled()
-{
-	generalutility=new GeneralUtility(driver);
-	return generalutility.is_Enabled(searchListButton);
+	searchListButton.click();
 }
 public void click_ReportButtonManageExpense()
 {
-	pageutility.scroll_andClick(reportButton);
+	reportButton.click();
 	String parentWindow=driver.getWindowHandle();
 	System.out.println(parentWindow);
 

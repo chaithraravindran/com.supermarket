@@ -19,24 +19,7 @@ public class PushNotificationTest extends Base
 	Excel excel=new Excel();
 	PushNotificationPage pushnotificationpage;
 	
-	@Test
-	public void verify_SuccessAlertPushNotification()
-	{
-		String titleField;
-		String descriptionField;
-		excel.setExcelFile("PushNotifications", "PushNotificationsInformations");
-		titleField=excel.getCellData(0,1);
-		descriptionField=excel.getCellData(1,1);
-		loginpage=new LoginPage(driver);
-		loginpage.login();
-		pushnotificationpage=new PushNotificationPage(driver);
-		pushnotificationpage.add_PushNotificationsInformations(titleField,descriptionField);
-		String expectedBackGroundColor=Constants.EXPECTED_BACKGROUND_COLOR_ALERT_TEXT14;
-		String actualBackGroundColor=pushnotificationpage.get_sucessAlertTextBackgroundColor();
-		Assert.assertEquals(actualBackGroundColor, expectedBackGroundColor);
-	}
-	
-	@Test(dataProvider="pushNotification",dataProviderClass=DataProviderClass.class)
+	@Test(dataProvider="PushNotificationExcelData",dataProviderClass=DataProviderClass.class)
 	public void verify_AlertTextPushNotificationByDataProviderClass(String title, String description)
 	{
 		loginpage=new LoginPage(driver);
@@ -46,7 +29,23 @@ public class PushNotificationTest extends Base
 		pushnotificationpage.enter_title(title);
 		pushnotificationpage.enter_description(description);
 		pushnotificationpage.click_onSendButton();
-		pushnotificationpage.getText_SuccessAlertPushNotificationMessage();
+		String expectedAlertValue=Constants.EXPECTED_ALERT_TEXT_VALUE;
+		String actualAlertValue=pushnotificationpage.visibilityOfSucessAlertMessage();
+		Assert.assertEquals(actualAlertValue, expectedAlertValue);
+		
+	}
+	@Test(priority=1)
+	public void verify_PushNotificationAlertByList()
+	{
+		loginpage=new LoginPage(driver);
+		loginpage.login();
+		pushnotificationpage=new PushNotificationPage(driver);
+		pushnotificationpage.click_OnPushNotification();
+		pushnotificationpage.add_PushNotificationsInformations("New Product", "Products arriving shortly");
+		pushnotificationpage.click_onSendButton();
+		String expectedBackGroundColor=Constants.EXPECTED_BACKGROUND_COLOR_ALERT_TEXT14;
+		String actualBackGroundColor=pushnotificationpage.get_sucessAlertTextBackgroundColor();
+		Assert.assertEquals(actualBackGroundColor, expectedBackGroundColor);
 	}
 	
 }

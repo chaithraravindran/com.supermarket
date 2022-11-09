@@ -7,8 +7,8 @@
         <methods>
           <include name="setUp"/>
           <include name="setUpCrossBrowser"/>
+          <include name="verify_adminUserActionButtonDeactivation"/>
           <include name="tearDown"/>
-          <include name="verify_UpdateAdminUser"/>
         </methods>
       </class> <!-- com.supermarket.tests.AdminUsersTest -->
     </classes>

@@ -23,5 +23,11 @@ public void element_ToBeClickable(long seconds,String xpath)
 	webdriverwait=new WebDriverWait(driver, Duration.ofSeconds(seconds));
 	webdriverwait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
 }
+public void visibility_OfElementLocated(long seconds,String xpath)
+{
+	webdriverwait=new WebDriverWait(driver,Duration.ofSeconds(seconds));
+	webdriverwait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+}
+
 }
 

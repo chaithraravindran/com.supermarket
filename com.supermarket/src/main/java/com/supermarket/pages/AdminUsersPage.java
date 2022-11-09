@@ -13,12 +13,14 @@ import org.openqa.selenium.support.ui.Select;
 import com.supermarket.utilities.Excel;
 import com.supermarket.utilities.GeneralUtility;
 import com.supermarket.utilities.PageUtility;
+import com.supermarket.utilities.WaitUtility;
 
 public class AdminUsersPage 
 {
 WebDriver driver;
 GeneralUtility generalutility;
 PageUtility pageutility;
+WaitUtility waitutility;
 
 @FindBy(xpath="//i[@class='nav-icon fas fa-users']")
 private WebElement adminUsersLink;
@@ -53,8 +55,20 @@ private WebElement searchButton;
 @FindBy(xpath="//button[@name='Search']")
 private WebElement searchAdminUsersButton;
 
+@FindBy(xpath="//tbody//tr//td[1]")
+private WebElement searchedAdminUser;
+
 @FindBy(xpath="//input[@id='un']")
 private WebElement userNameSearch;
+
+@FindBy(xpath="//i[@class='fa fa-unlock']")
+private WebElement deactivateActionColor;
+
+@FindBy(xpath="//li[@class='nav-item dropdown']")
+private WebElement adminUserName;
+
+@FindBy(xpath="//i[@class='ace-icon fa fa-power-off']")
+private WebElement logOutButton;
 
 public AdminUsersPage(WebDriver driver)
 {
@@ -63,6 +77,8 @@ public AdminUsersPage(WebDriver driver)
 }
 public void click_OnAdminUsers()
 {
+	waitutility=new WaitUtility(driver);
+	waitutility.element_ToBeClickable(20L, "//i[@class='nav-icon fas fa-users']");
 	adminUsersLink.click();
 }
 public void click_OnNewButton() 
@@ -77,10 +93,10 @@ public void enter_PassWord(String PassWord)
 {
 	passWord.sendKeys(PassWord);
 }
-public void choose_UserType()
+public void choose_UserType(int a)
 {
 	pageutility=new PageUtility(driver);
-	pageutility.select_ByIndex(3,userType);
+	pageutility.select_ByIndex(a,userType);
 }
 public void click_OnSaveButton()
 {
@@ -94,7 +110,7 @@ public void click_OnSearchButton()
 {
 	searchButton.click();
 }
-public void enter_UserNameSearch(String UserName)
+public void enter_UserNameSearchField(String UserName)
 {
 	userNameSearch.sendKeys(UserName);
 }
@@ -102,37 +118,37 @@ public void click_OnSearchAdminUsersButton()
 {
 	searchAdminUsersButton.click();
 }
-
-public void AdminUserDetails(String UserName,String PassWord)
+public void click_OnAdminUserName()
+{
+	adminUserName.click();
+}
+public void click_OnLogOutButton()
+{
+	click_OnAdminUserName();
+	logOutButton.click();
+}
+public void create_AdminUserDetails(String UserName,String PassWord)
 {
 	click_OnAdminUsers();
 	click_OnNewButton();
 	enter_UserName(UserName);
 	enter_PassWord(PassWord);
-	choose_UserType();
-	click_OnSaveButton();
 }
 public boolean is_alertTextMessageDisplayed()
 {
 	generalutility=new GeneralUtility(driver);
 	return generalutility.is_Displayed(alertMessage);
 }
-public String get_TextAlertMessage()
+public String visibilityOfAlertMessage()
 {
 	generalutility=new GeneralUtility(driver);
-	return generalutility.get_Text(alertMessage);
+	return generalutility.get_Attribute(alertMessage,"class");
 }
 public String get_BackGroundColorAlertText()
 {
 	generalutility=new GeneralUtility(driver);
 	return generalutility.get_CssValue(alertMessage,"background-color");
 }
-
-/*public String get_BackGroundColorSucessAlertText()
-{
-	generalutility=new GeneralUtility(driver);
-	return generalutility.get_CssValue(sucessAlertMessage,"background-color");
-}*/
 public void deactivate_statusAdminUser(String adminUserName)
 {
 	generalutility=new GeneralUtility(driver);
@@ -172,11 +188,11 @@ public void deactivate_actionButtonAdminUser(String adminUserName)
 WebElement deactivateActionButton=driver.findElement(By.xpath("(//tbody//tr["+j+"]//td[5]//a)[1]"));
 deactivateActionButton.click();
 }
-public String get_successAlertTextFontSize()
+public String visibilityOfSucessAlertMessage()
 {
 	generalutility=new GeneralUtility(driver);
-	return generalutility.get_CssValue(sucessAlertMessage,"font-size");
-} 
+	return generalutility.get_Attribute(sucessAlertMessage,"class");
+}
 public void deleteAdminUser(String adminUserName)
 {
 	generalutility=new GeneralUtility(driver);
@@ -195,10 +211,10 @@ WebElement deleteAdminUserButton=driver.findElement(By.xpath("(//tbody//tr["+j+"
 deleteAdminUserButton.click();
 driver.switchTo().alert().accept();
 }
-public String get_alertTextFontWeight()
+public boolean searchedAdminUser_IsDisplayed()
 {
 	generalutility=new GeneralUtility(driver);
-	return generalutility.get_CssValue(sucessAlertMessage,"font-weight");
+	return generalutility.is_Displayed(searchedAdminUser);
 }
 public void edit_AdminUser(String adminUserName)
 {
@@ -222,19 +238,14 @@ public void clear_Field()
 	generalutility=new GeneralUtility(driver);
 	generalutility.clear_Text(userName);
 }
-public boolean is_UpdateButtonEnabled()
-{
-	generalutility=new GeneralUtility(driver);
-	return generalutility.is_Enabled(updateButton);
-}
 public void update_Field(String UserName)
 {
 	enter_UserName(UserName);
 }
-public boolean searchAdminUsersButton_IsDisplayed()
+public String  get_TextSearchName()
 {
 	generalutility=new GeneralUtility(driver);
-	return generalutility.is_Displayed(searchAdminUsersButton);
+	return generalutility.get_Text(searchedAdminUser);
 }
 }
 

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="parallelRun" thread-count="3" parallel="tests">
+	<listeners>
+		<listener
+			class-name="com.supermarket.listeners.ExtendReporter"></listener>
+	</listeners>
+	<test name="Smoke">
+		<classes>
+			<class name="com.supermarket.tests.ManageUsersTest">
+			</class>
+			<class name="com.supermarket.tests.ManageExpenseTest">
+			</class>
+		</classes>
+	</test>
+
+	<test name="Regression">
+		<classes>
+			<class name="com.supermarket.tests.LoginTest">
+			</class>
+			<class name="com.supermarket.tests.PushNotificationTest">
+			</class>
+		</classes>
+	</test>
+</suite>

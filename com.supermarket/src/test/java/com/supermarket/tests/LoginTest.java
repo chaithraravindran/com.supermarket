@@ -28,7 +28,7 @@ public class LoginTest extends Base
 		loginpage.login();
 		Assert.assertTrue(loginpage.is_ProfileImageDisplayed());
 	}
-	@Test
+	@Test(priority=1)
 	public void verify_InvalidLoginCredentialAlertMessage()
 	{
 		loginpage=new LoginPage(driver);

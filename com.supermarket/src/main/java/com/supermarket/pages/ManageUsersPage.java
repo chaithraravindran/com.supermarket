@@ -23,18 +23,26 @@ Excel excel=new Excel();
 @FindBy(xpath="//i[@class='nav-icon fas fa-user']")
 private WebElement manageUsersLink;
 
+@FindBy(xpath="//div[@class='alert alert-success alert-dismissible']")
+private WebElement sucessAlertMessage;
+
 @FindBy(xpath="//a[@class='btn btn-rounded btn-primary']")
 private WebElement searchButton;
+
 @FindBy(xpath="//input[@placeholder='Name']")
 private WebElement name;
+
 @FindBy(xpath="//input[@placeholder='Email']")
 private WebElement email;
+
 @FindBy(xpath="//input[@placeholder='Phone Number']")
 private WebElement phoneNumber;
+
+@FindBy(xpath="//span[@id='res']")
+private WebElement ListUsersTable;
+
 @FindBy(xpath="//i[@class='fa fa-search']")
 private WebElement searchButtonInSearchListUsers;
-//@FindBy(xpath="//button[@class='btn btn-block-sm btn-danger']")
-//private WebElement searchButtonInSearchListUsers;
 
 public ManageUsersPage(WebDriver driver)
 {
@@ -45,27 +53,6 @@ public void click_OnManageUsers()
 {
 	manageUsersLink.click();
 }
-public void deactivate_User(String userName)
-{
-generalutility=new GeneralUtility(driver);
-pageutility=new PageUtility(driver);
-int j=0;
-List<String> names=new ArrayList<String>();
-names=generalutility.get_TextOfElements("//tbody//tr//td[1]");
-for(j=0;j<names.size();j++)
-{
-	if(userName.equals(names.get(j)))
-		{
-		j++;
-		break;
-		}
-	
-}
-WebElement deactivateButton=driver.findElement(By.xpath("//tbody//tr["+j+"]//td[5]//a"));
-deactivateButton.click();
-}
-
-
 public void click_OnSearchButton()
 {
 	searchButton.click();
@@ -86,24 +73,44 @@ public void click_OnSearchButtonInSearchListUsers()
 {
 	searchButtonInSearchListUsers.click();
 }
-public void searchUser(String Name,String Email,String PhoneNumber)
+public void deactivate_User(String userName)
+{
+generalutility=new GeneralUtility(driver);
+pageutility=new PageUtility(driver);
+int j=0;
+List<String> names=new ArrayList<String>();
+names=generalutility.get_TextOfElements("//tbody//tr//td[1]");
+for(j=0;j<names.size();j++)
+{
+	if(userName.equals(names.get(j)))
+		{
+		j++;
+		break;
+		}
+}
+WebElement deactivateButton=driver.findElement(By.xpath("//tbody//tr["+j+"]//td[5]//a"));
+deactivateButton.click();
+}
+public void searchUser(String Name)
 {
 	click_OnManageUsers();
 	click_OnSearchButton();
 	enter_Name(Name);
-	enterEmail(Email);
-	enterPhoneNumber(PhoneNumber);
 	click_OnSearchButtonInSearchListUsers();
 }
-public void searchUser()
+public void scroll_DownPage(int a,int b)
 {
-	String name;
-	String email;
-	String phoneNumber;
-	excel.setExcelFile("Manage Users Details","SearchListUsers");
-	name=excel.getCellData(0,0);
-	email=excel.getCellData(0,1);
-	phoneNumber=excel.getCellData(0,2);
-	searchUser(name,email,phoneNumber);
+	pageutility=new PageUtility(driver);
+	pageutility.scroll_DownJSExecutor(a,b);
+}
+public String get_TextListUsersTable()
+{
+	generalutility=new GeneralUtility(driver);
+	return generalutility.get_Text(ListUsersTable);
+} 
+public boolean is_SucessAlertTextMessageDisplayed()
+{
+	generalutility=new GeneralUtility(driver);
+	return generalutility.is_Displayed(sucessAlertMessage);
 }
 }

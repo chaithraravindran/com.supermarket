@@ -60,6 +60,13 @@ private WebElement searchButton;
 @FindBy(xpath="//input[@placeholder='Name']")
 private WebElement nameField;
 
+@FindBy(xpath="//button[@name='Search']")
+private WebElement search_ButtonSearchDeliveryBoy;
+
+@FindBy(xpath="//tbody//tr//td[1]")
+private WebElement searchedDeliveryBoy;
+
+
 public DeliveryBoyPage(WebDriver driver)
 {
 	this.driver=driver;
@@ -77,17 +84,14 @@ public void enterName(String Name)
 {
 	name.sendKeys(Name);
 }
-
 public void enterEmail(String Email) 
 {
 	email.sendKeys(Email);
 }
-
 public void enterPhoneNumber(String PhoneNumber) 
 {
 	phoneNumber.sendKeys(PhoneNumber);
 }
-
 public void enterAddress(String Address) 
 {
 	address.sendKeys(Address);
@@ -96,15 +100,25 @@ public void enterUserName(String UserName)
 {
 	userName.sendKeys(UserName);
 }
-
 public void enterPassword(String PassWord) 
 {
 	passWord.sendKeys(PassWord);
 }
-
 public void saveLink() 
 {
 	saveButton.click();
+}
+public void click_OnSearchButton()
+{
+	searchButton.click();
+}
+public void enter_NameSearchDeliveryBoy(String Name)
+{
+	nameField.sendKeys(Name);
+}
+public void click_OnSearchButtonSearchDeliveryBoy()
+{
+	search_ButtonSearchDeliveryBoy.click();
 }
 public void click_OnUpdateButton()
 {
@@ -133,6 +147,11 @@ public boolean is_alertTextMessageDisplayed()
 	generalutility=new GeneralUtility(driver);
 	return generalutility.is_Displayed(alertMessage);
 }
+public boolean is_SucessAlertTextMessageDisplayed()
+{
+	generalutility=new GeneralUtility(driver);
+	return generalutility.is_Displayed(sucessAlertMessage);
+}
 public String get_colorAlertText()
 {
 	generalutility=new GeneralUtility(driver);
@@ -156,11 +175,12 @@ WebElement statusButton=driver.findElement(By.xpath("//tbody//tr["+j+"]//td[6]//
 statusButton.click();
 generalutility=new GeneralUtility(driver);
 }
-public String get_sucessAlertTextBackgroundColor()
+public String visibilityOfAlertMessage()
 {
 	generalutility=new GeneralUtility(driver);
-	return generalutility.get_CssValue(sucessAlertMessage,"background-color");
+	return generalutility.get_Attribute(sucessAlertMessage,"class");
 }
+
 public void deleteDeliveryBoy(String deliveryBoyName)
 {
 	generalutility=new GeneralUtility(driver);
@@ -179,6 +199,11 @@ WebElement deleteButton=driver.findElement(By.xpath("(//tbody//tr["+j+"]//td[8]/
 deleteButton.click();
 driver.switchTo().alert().getText();
 driver.switchTo().alert().accept();
+}
+public boolean searchedDeliveryBoy_IsDisplayed()
+{
+	generalutility=new GeneralUtility(driver);
+	return generalutility.is_Displayed(searchedDeliveryBoy);
 }
 public String get_successAlertTextFontSize()
 {
@@ -207,13 +232,13 @@ public void clear_Field()
 	generalutility=new GeneralUtility(driver);
 	generalutility.clear_Text(email);
 }
-public boolean is_UpdateButtonEnabled()
-{
-	generalutility=new GeneralUtility(driver);
-	return generalutility.is_Enabled(updateButton);
-}
 public void update_Field(String Email)
 {
 	enterEmail(Email);
+}
+public String get_sucessAlertTextBackgroundColor()
+{
+	generalutility=new GeneralUtility(driver);
+	return generalutility.get_CssValue(sucessAlertMessage,"background-color");
 }
 }
